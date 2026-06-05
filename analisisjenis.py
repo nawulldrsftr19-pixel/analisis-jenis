@@ -14,22 +14,33 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# ─── CUSTOM CSS ────────────────────────────────────────────────────────────────
+# -- CUSTOM CSS --
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap');
+@import url('https://googleapis.com');
 
-html, body, [class*="css"] { font-family: 'Syne', sans-serif; }
-[data-testid="stAppViewContainer"] { background: #0a0e1a; color: #e2e8f0; }
-[data-testid="stHeader"] { background: transparent; }
-.main .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
+html, body, [data-testid="stAppViewContainer"] {
+    font-family: 'Syncopate', sans-serif;
+    background-color: #0a1628;
+    color: #e2e8f0;
+}
 
-h1,h2,h3 { color: #e2e8f0 !important; }
+[data-testid="stHeader"] {
+    background: transparent;
+}
+
+.main .block-container {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
 
 /* cards */
 .lab-card {
     background: #111827;
     border: 1px solid #1e3a5f;
+}
+</style>
+""", unsafe_allow_html=True) # <-- PASTIKAN ADA PENUTUP INI RATA KIRI
     border-radius: 12px;
     padding: 20px 24px;
     margin-bottom: 16px;
