@@ -83,8 +83,6 @@ sim_data_list = [
         ]
     }
 ]
-   
-        ]
     }, # Penutup data pertama
     {  # Pembuka data kedua (Baris 84/85)
         "id": "g1",  
