@@ -77,17 +77,24 @@ sim_data={
             {"color": "#64748b", "text": "Larutan jernih / sedikit keruh"},
         ],
         "log": [
-            ("msg",    "Sampel dimuat ke tabung sentrifugasi."),
-            ("msg",    "Kation potensial: Ag⁺, Pb²⁺, Hg₂²⁺, Fe³⁺, Al³⁺, Ba²⁺, Sr²⁺, Ca²⁺"),
+sim_data_list = [
+    {
+        "rpm": 0,
+        "duration": 0,
+        "tubes": [
+            {"label": "Sampel", "color": "#334155", "liquid_pct": 60, "pellet_pct": 0},
         ],
-    },
-    
-        "id": "g1",
-        "name": "Langkah 1 — Golongan I",
-        "reagent": "HCl encer (2M)",
-        "desc": "Tambahkan HCl encer 2M tetes demi tetes ke sampel. Kation Golongan I mengendap sebagai klorida tak larut. Kocok lembut lalu sentrifugasi.",
-        "rpm": 3000,
-        "duration": 3,   # seconds in sim (represents 90 s real)
+        "obs": [
+            {"color": "#64748b", "text": "Larutan jernih / sedikit keruh"},
+        ],
+        "log": [
+            {"msg": "Sampel dimuat ke tabung sentrifugasi."},
+            {"msg": "Kation potensial: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+"}
+        ]
+    }, # Penutup data pertama
+    {  # Pembuka data kedua (Baris 84/85)
+        "id": "g1",  
+        # ... sisa data Anda di bawahnya ...
         "tubes": [
             {"label": "Supernatan", "color": "#1e40af", "liquid_pct": 50, "pellet_pct": 0},
             {"label": "Pellet G-I",  "color": "#93c5fd", "liquid_pct": 25, "pellet_pct": 14},
