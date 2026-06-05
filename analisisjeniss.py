@@ -2,151 +2,171 @@ import streamlit as st
 import time
 
 # --- KONFIGURASI HALAMAN ---
-st.set_page_config(page_title="Lab Virtual: Analisis Kation", layout="wide")
+st.set_page_config(page_title="Sentrifugasi Lab Pro", layout="wide")
 
-# --- GAYA VISUAL (CSS) ---
+# --- CUSTOM CSS (Tema Biru & Animasi Tabung) ---
 st.markdown("""
     <style>
-    .main { background-color: #f8f9fa; }
-    .stButton>button { width: 100%; border-radius: 10px; height: 3.5em; font-weight: bold; }
-    .test-tube {
-        border: 2px solid #333;
-        border-radius: 0 0 25px 25px;
-        width: 60px;
-        height: 150px;
-        margin: 10px auto;
-        position: relative;
-        background: #e0e0e0;
+    /* Tema Utama Biru */
+    .stApp {
+        background: linear-gradient(to right, #e3f2fd, #bbdefb);
     }
-    .liquid {
+    .main-title {
+        color: #0d47a1;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    /* Desain Tabung Reaksi Realistis */
+    .glass-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .tube {
+        width: 70px;
+        height: 200px;
+        border: 3px solid rgba(255, 255, 255, 0.6);
+        border-bottom-left-radius: 35px;
+        border-bottom-right-radius: 35px;
+        position: relative;
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0 0 15px rgba(255,255,255,0.5), 5px 5px 15px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    .supernatant {
         position: absolute;
         bottom: 0;
         width: 100%;
-        border-radius: 0 0 22px 22px;
-        transition: height 1s, background-color 1s;
+        transition: all 2s ease-in-out;
     }
     .pellet {
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 20px;
-        border-radius: 0 0 22px 22px;
-        background-color: #555;
-        display: none;
+        height: 0px;
+        transition: all 2s ease-in-out;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    
+    /* Efek Berkilau Gelas */
+    .tube::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 10px;
+        height: 150px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- FUNGSI PEMBANTU ---
-def visualisasi_tabung(warna_larutan="rgba(255,255,255,0.5)", tinggi_isi="70%", ada_pellet=False, warna_pellet="#fff"):
-    pellet_display = "block" if ada_pellet else "none"
+# --- FUNGSI KOMPONEN ---
+def tampilkan_tabung(warna_cair, tinggi_cair, warna_endapan="#fff", tinggi_endapan=0, cloudy=False):
+    opacity = "0.6" if cloudy else "0.9"
     st.markdown(f"""
-        <div class="test-tube">
-            <div class="liquid" style="height: {tinggi_isi}; background-color: {warna_larutan};"></div>
-            <div class="pellet" style="display: {pellet_display}; background-color: {warna_pellet};"></div>
+        <div class="glass-container">
+            <div class="tube">
+                <div class="supernatant" style="height: {tinggi_cair}%; background-color: {warna_cair}; opacity: {opacity};"></div>
+                <div class="pellet" style="height: {tinggi_endapan}px; background-color: {warna_endapan};"></div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
-def animasi_sentrifugasi():
-    with st.spinner('🔄 Menyeimbangkan tabung dan memutar pada 3000 rpm...'):
-        bar = st.progress(0)
-        for i in range(100):
-            time.sleep(0.03)
-            bar.progress(i + 1)
-    st.success("✅ Sentrifugasi Selesai (1-2 menit). Pellet dan Supernatan terpisah!")
+def proses_sentrifugasi(warna_awal, warna_akhir, warna_pellet):
+    placeholder = st.empty()
+    with placeholder.container():
+        st.write("🔄 **Sentrifugasi 3000 rpm Sedang Berlangsung...**")
+        tampilkan_tabung(warna_awal, 80, cloudy=True)
+    
+    progress_bar = st.progress(0)
+    for i in range(100):
+        time.sleep(0.03)
+        progress_bar.progress(i + 1)
+    
+    placeholder.empty()
+    st.success("✅ Pemisahan Selesai! Supernatan (atas) dan Pellet (bawah) telah terpisah.")
+    tampilkan_tabung(warna_akhir, 70, warna_endapan=warna_pellet, tinggi_endapan=30)
 
 # --- UI UTAMA ---
-st.title("🧪 Simulasi Analisis Kualitatif Kation")
-st.caption("Berdasarkan Metode Sentrifugasi (Ag+, Pb2+, Hg2^2+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+)")
+st.markdown('<h1 class="main-title">🧪 Virtual Lab: Analisis Kation Pro</h1>', unsafe_allow_html=True)
 
-menu = st.sidebar.selectbox("Pilih Tahapan Analisis:", 
-    ["Pendahuluan", "Golongan I (HCl)", "Golongan III (NH4OH)", "Golongan IV ((NH4)2CO3)"])
+tab1, tab2, tab3 = st.tabs(["🔹 Golongan I", "🔹 Golongan III", "🔹 Golongan IV"])
 
-# --- HALAMAN: PENDAHULUAN ---
-if menu == "Pendahuluan":
-    st.header("📍 Prinsip Dasar")
-    col1, col2 = st.columns(2)
+# --- GOLONGAN I ---
+with tab1:
+    st.subheader("Pemisahan Ag+, Pb2+, Hg2^2+")
+    st.info("Prinsip: Penambahan HCl membentuk endapan klorida putih [1].")
+    
+    col1, col2 = st.columns([1, 2])
     with col1:
-        st.write("""
-        **Sentrifugasi** digunakan untuk memisahkan:
-        1. **Pellet (Endapan)**: Partikel padat di bawah tabung [1].
-        2. **Supernatan (Larutan)**: Cairan bening di atas pellet [1].
-        """)
-        visualisasi_tabung(warna_larutan="rgba(173, 216, 230, 0.5)", ada_pellet=True, warna_pellet="#f0f0f0")
+        if st.button("Tambahkan HCl & Putar"):
+            proses_sentrifugasi("rgba(255,255,255,0.8)", "rgba(200,230,255,0.4)", "#ffffff")
     with col2:
-        st.warning("**Catatan Penting:**\n- Pastikan tabung seimbang saat sentrifugasi.\n- Ambil supernatan dengan hati-hati agar tidak mengganggu pellet [2].")
+        st.write("**Hasil Identifikasi:**")
+        reaksi = st.selectbox("Pilih Uji Spesifik:", ["-", "Uji Timbal (K2CrO4)", "Uji Merkuri (NH4OH)"])
+        if reaksi == "Uji Timbal (K2CrO4)":
+            st.warning("Hasil: Pb2+ + K2CrO4 → 🟡 Endapan Kuning [1]")
+            tampilkan_tabung("yellow", 80, warna_endapan="#ffd700", tinggi_endapan=40)
+        elif reaksi == "Uji Merkuri (NH4OH)":
+            st.error("Hasil: Hg2Cl2 + NH4OH → ⚫ Endapan Hitam [1]")
+            tampilkan_tabung("#333", 80, warna_endapan="#000", tinggi_endapan=40)
 
-# --- HALAMAN: GOLONGAN I ---
-elif menu == "Golongan I (HCl)":
-    st.header("🧪 Pemisahan Golongan I")
-    st.write("Sampel + **HCl encer**")
+# --- GOLONGAN III ---
+with tab2:
+    st.subheader("Pemisahan Fe3+ & Al3+")
+    st.info("Prinsip: Penambahan NH4OH membentuk endapan hidroksida [2].")
     
-    if st.button("Jalankan Reaksi & Sentrifugasi"):
-        visualisasi_tabung(warna_larutan="white", tinggi_isi="80%")
-        st.info("Terbentuk endapan putih AgCl, PbCl2, dan Hg2Cl2 [1].")
-        animasi_sentrifugasi()
-        
-        st.subheader("Uji Identifikasi Spesifik:")
-        c1, c2, c3 = st.columns(3)
-        with c1:
-            st.markdown("**Perak (Ag+)**")
-            st.write("AgCl + NH4OH → Larut")
-            visualisasi_tabung(warna_larutan="rgba(255,255,255,0.8)")
-        with c2:
-            st.markdown("**Timbal (Pb2+)**")
-            st.write("+ K2CrO4 → 🟡 Kuning")
-            visualisasi_tabung(warna_larutan="yellow")
-        with c3:
-            st.markdown("**Merkuri (Hg2^2+)**")
-            st.write("+ NH4OH → ⚫ Hitam")
-            visualisasi_tabung(warna_larutan="black")
+    if st.button("Tambahkan NH4OH"):
+        proses_sentrifugasi("rgba(165, 42, 42, 0.6)", "rgba(255,255,255,0.2)", "#8B4513")
+        st.write("**Analisis Lanjutan:**")
+        st.markdown("- **Fe3+ + SCN-**: Larutan berubah menjadi 🔴 **Merah Darah** [2].")
+        tampilkan_tabung("rgba(139, 0, 0, 0.9)", 85)
 
-# --- HALAMAN: GOLONGAN III ---
-elif menu == "Golongan III (NH4OH)":
-    st.header("🧪 Pemisahan Golongan III")
-    st.write("Supernatan + **NH4OH**")
+# --- GOLONGAN IV ---
+with tab3:
+    st.subheader("Pemisahan Ba2+, Sr2+, Ca2+")
+    st.info("Prinsip: Penambahan (NH4)2CO3 menghasilkan endapan putih [2].")
     
-    if st.button("Jalankan Reaksi"):
-        st.info("Terbentuk endapan Fe(OH)3 dan Al(OH)3 [3].")
-        animasi_sentrifugasi()
+    if st.button("Jalankan Uji Golongan IV"):
+        proses_sentrifugasi("rgba(255,255,255,0.7)", "rgba(240,248,255,0.5)", "#ffffff")
         
-        st.subheader("Hasil Identifikasi:")
-        k1, k2 = st.columns(2)
-        with k1:
-            st.error("**Besi (Fe3+)**")
-            st.write("+ SCN- → 🔴 Merah Darah")
-            visualisasi_tabung(warna_larutan="rgba(139, 0, 0, 0.9)")
-        with k2:
-            st.success("**Aluminium (Al3+)**")
-            st.write("Al(OH)3 larut dalam NaOH dan mengendap kembali dengan HCl [3].")
-            visualisasi_tabung(warna_larutan="rgba(255, 255, 255, 0.3)", ada_pellet=True, warna_pellet="white")
+    st.divider()
+    st.write("**🔥 Simulasi Uji Nyala & Reaksi Warna:**")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.write("Barium (Ba2+)")
+        st.write("🟡 Endapan Kuning (Kromat) [2]")
+        st.markdown("<div style='background: #adff2f; height: 20px; border-radius: 5px;'></div>", unsafe_allow_html=True)
+    with c2:
+        st.write("Stronsium (Sr2+)")
+        st.write("⚪ Endapan Putih (Sulfat) [2]")
+        st.markdown("<div style='background: #ff0000; height: 20px; border-radius: 5px;'></div>", unsafe_allow_html=True)
+    with c3:
+        st.write("Kalsium (Ca2+)")
+        st.write("⚪ Endapan Putih (Oksalat) [2]")
+        st.markdown("<div style='background: #ff4500; height: 20px; border-radius: 5px;'></div>", unsafe_allow_html=True)
 
-# --- HALAMAN: GOLONGAN IV ---
-elif menu == "Golongan IV ((NH4)2CO3)":
-    st.header("🧪 Pemisahan Golongan IV")
-    st.write("Supernatan + **(NH4)2CO3**")
-    
-    if st.button("Jalankan Pengendapan"):
-        st.info("Terbentuk endapan BaCO3, SrCO3, dan CaCO3 (Semua Putih) [3].")
-        animasi_sentrifugasi()
-        
-        st.subheader("Uji Spesifik & Simulasi Uji Nyala:")
-        j1, j2, j3 = st.columns(3)
-        with j1:
-            st.warning("**Barium (Ba2+)**")
-            st.write("+ CrO4^2- → 🟡 Kuning")
-            st.markdown("<div style='background: #adff2f; color: black; padding: 5px; text-align:center;'>🔥 Nyala Hijau Apel</div>", unsafe_allow_html=True)
-            visualisasi_tabung(warna_larutan="yellow")
-        with j2:
-            st.error("**Stronsium (Sr2+)**")
-            st.write("+ SO4^2- → ⚪ Putih")
-            st.markdown("<div style='background: #ff0000; color: white; padding: 5px; text-align:center;'>🔥 Nyala Merah Tua</div>", unsafe_allow_html=True)
-            visualisasi_tabung(warna_larutan="white")
-        with j3:
-            st.error("**Kalsium (Ca2+)**")
-            st.write("+ C2O4^2- → ⚪ Putih")
-            st.markdown("<div style='background: #ff4500; color: white; padding: 5px; text-align:center;'>🔥 Nyala Merah Bata</div>", unsafe_allow_html=True)
-            visualisasi_tabung(warna_larutan="white")
-
-st.sidebar.markdown("---")
-st.sidebar.info("Gunakan aplikasi ini untuk memahami urutan pemisahan kation secara kualitatif.")
+# --- FOOTER ---
+st.sidebar.markdown("""
+### 📘 Panduan Teknis
+1. **Keseimbangan**: Pastikan tabung seimbang sebelum memutar [3].
+2. **Kecepatan**: Aplikasi ini mensimulasikan putaran **3000 rpm** [1].
+3. **Pemisahan**: Ambil supernatan perlahan tanpa mengganggu pellet di dasar tabung [3].
+""")
+Keunggulan Pembaruan Ini:
+Visualisasi Tabung Lebih Nyata: Menggunakan CSS box-shadow dan linear-gradient untuk menciptakan efek tabung kaca tiga dimensi yang transparan.
+Perbedaan Larutan & Endapan:
+Supernatan: Direpresentasikan sebagai lapisan atas yang jernih (rgba transparan).
+Pellet: Direpresentasikan sebagai lapisan padat di bagian paling bawah tabung dengan warna yang sesuai dengan reaksi kimia (misalnya hitam untuk merkuri atau kuning untuk timbal).
+Animasi Transisi: Saat tombol ditekan, aplikasi akan menunjukkan kondisi "Cloudy" (keruh/bercampur) terlebih dahulu sebelum perlahan-lahan berubah menjadi jernih dengan endapan di bawah setelah proses sentrifugasi selesai.
+Tema Biru yang Menarik: Menggunakan palet warna biru muda hingga biru tua untuk memberikan kesan profesional laboratorium modern.
+Interaktivitas: Menggunakan tabs dan selectbox agar pengguna bisa fokus pada satu golongan kation pada satu waktu, sesuai dengan prosedur bertahap dalam sumber.
+Anda dapat menjalankan kode ini dengan perintah streamlit run nama_file.py untuk melihat animasinya secara langsung.
