@@ -1157,4 +1157,4 @@ st.markdown(
       Simulasi Pendidikan Kimia Analitik
     </div>
     """,
-    unsafe_allow_html=True,
+    
