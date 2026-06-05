@@ -1,8 +1,3 @@
-"""
-LabKim Interactive — Analisis Kualitatif Kation (Metode Sentrifugasi)
-Streamlit App
-"""
-
 import streamlit as st
 import time
 
