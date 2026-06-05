@@ -335,12 +335,15 @@ with col_view:
         
         for obs in step_data["obs"]:
             st.markdown(f'<span class="obs-pill" style="border-color:{obs["color"]}"><span style="color:{obs["color"]};">●</span> {obs["text"]} (Tinggi Pelet: {calc_pellet_pct}%)</span>', unsafe_allow_html=True)
-    log_html = '<div class="log-box">'
-    for ltype, msg in step_data["log"]:
-        tag = '<span class="log-react">Rxn:</span>' if ltype == "react" else '<span>Info:</span>'
-        log_html += f'<div><span class="log-time">[{time.strftime("%H:%M:%S")}]</span> {tag} {msg}</div>'
-    log_html += '</div>'
-    st.markdown(log_html, unsafe_allow_html=True)
+
+        # Log Box Buku Catatan Laboratorium (Bagian yang memicu error spasi sebelumnya)
+        st.markdown('<div class="section-label" style="margin-top:15px;">LOG REAKSI</div>', unsafe_allow_html=True)
+        log_html = '<div class="log-box">'
+        for ltype, msg in step_data["log"]:
+            tag = '<span class="log-react">Rxn:</span>' if ltype == "react" else '<span>Info:</span>'
+            log_html += f'<div><span class="log-time">[{time.strftime("%H:%M:%S")}]</span> {tag} {msg}</div>'
+        log_html += '</div>'
+        st.markdown(log_html, unsafe_allow_html=True)
 
 # 📌 TAB 2: INTERAKTIF UJI NYALA BALSAM BUNSEN (GOLONGAN IV)
 with tab_flame:
