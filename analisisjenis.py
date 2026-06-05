@@ -728,30 +728,30 @@ with tab_sim:
         spinning = False  # only true during run callback
         rpm_display = current["rpm"] if st.session_state.sim_step in st.session_state.completed else 0
 
-        st.markdown(f"""
-        <div style="background:#1a2235;border:1px solid #1e3a5f;border-radius:16px;
-                    padding:28px;text-align:center;min-height:380px;">
-          <div style="margin-bottom:18px">
-            <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="60" cy="60" r="54" fill="#0a1628"
-                      stroke="#00d4ff" stroke-width="3"
-                      style="filter:drop-shadow(0 0 10px rgba(0,212,255,0.3))"/>
-              <line x1="60" y1="60" x2="110" y2="60"  stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-              <line x1="60" y1="60" x2="60"  y2="110" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-              <line x1="60" y1="60" x2="10"  y2="60"  stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-              <line x1="60" y1="60" x2="60"  y2="10"  stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-              <circle cx="60" cy="60" r="8" fill="#00d4ff" opacity="0.6"/>
-            </svg>
-          </div>
-
-          <div style="display:flex;align-items:center;gap:12px;background:#0a0e1a;
-                      border:1px solid #1e3a5f;border-radius:10px;padding:10px 16px;
-                      margin-bottom:18px;justify-content:space-between">
-            <div>
-              <div style="font-family:'Space Mono',monospace;font-size:9px;
-                          color:#64748b;text-transform:uppercase;letter-spacing:1px">RPM</div>
-              <div style="font-family:'Space Mono',monospace;font-size:22px;
-                          font-weight:700;color:#00d4ff">{rpm_display:,}</div>
-            </div>
-            <div style="flex:1;height:6px;background:#1e3a5f;border-radius:3px;overflow:hidden">
-              <div style="width:{(rpm_display)}
+st.markdown(f"""
+<div style="background:#1a2235; border:1px solid #1e3a5f; border-radius:16px; padding:28px; text-align:center; min-height:380px;">
+    <div style="margin-bottom:18px;">
+        <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://w3.org">
+            <circle cx="60" cy="60" r="54" fill="#0a1628" stroke="#00d4ff" stroke-width="3" style="filter: drop-shadow(0 10px rgba(0,212,255,0.3));" />
+            <line x1="60" y1="60" x2="110" y2="60" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <line x1="60" y1="60" x2="10" y2="60" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <line x1="60" y1="60" x2="60" y2="110" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <line x1="60" y1="60" x2="60" y2="10" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <line x1="60" y1="60" x2="10" y2="10" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <line x1="60" y1="60" x2="95" y2="25" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <circle cx="60" cy="60" r="8" fill="#00d4ff" opacity="0.6" />
+        </svg>
+    </div>
+    
+    <div style="display:flex; align-items:center; gap:12px; background:#0a1a3a; border:1px solid #1e3a5f; border-radius:10px; padding:10px 16px; margin-bottom:18px; justify-content:space-between;">
+        <div>
+            <div style="font-family:'Space Mono', monospace; font-size:9px; color:#64748b; text-transform:uppercase; letter-spacing:1px;">RPM</div>
+            <div style="font-family:'Space Mono', monospace; font-size:22px; font-weight:700; color:#00d4ff;">{rpm_display}</div>
+        </div>
+    </div>
+    
+    <div style="flex:1; height:6px; background:#1e3a5f; border-radius:3px; overflow:hidden;">
+        <div style="width:{rpm_display}%;"></div>
+    </div>
+</div>
+""", unsafe_allow_html=True)       
