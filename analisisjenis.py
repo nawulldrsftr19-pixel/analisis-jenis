@@ -754,4 +754,4 @@ with tab_sim:
                           font-weight:700;color:#00d4ff">{rpm_display:,}</div>
             </div>
             <div style="flex:1;height:6px;background:#1e3a5f;border-radius:3px;overflow:hidden">
-              <div style="width:{(rpm_display/)}
+              <div style="width:{(rpm_display)}
