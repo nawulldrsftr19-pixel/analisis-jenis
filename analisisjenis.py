@@ -1,8 +1,3 @@
-"""
-LabKim Interactive — Analisis Kualitatif Kation (Metode Sentrifugasi)
-Streamlit App
-"""
-
 import streamlit as st
 
 # ─── PAGE CONFIG ───────────────────────────────────────────────────────────────
@@ -10,20 +5,7 @@ st.set_page_config(
     page_title="LabKim — Analisis Kualitatif Kation",
     page_icon="⚗️",
     layout="wide",
-    initial_sidebar_state="collapsed",
-)
-
-# ─── CUSTOM CSS ────────────────────────────────────────────────────────────────
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap');
-
-html, body, [class*="css"] { font-family: 'Syne', sans-serif; }
-[data-testid="stAppViewContainer"] { background: #0a0e1a; color: #e2e8f0; }
-[data-testid="stHeader"] { background: transparent; }
-.main .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
-
-h1,h2,h3 { color: #e2e8f0 !important; }
+    initial_sidebar_state="collapsed",)
 
 /* cards */
 .lab-card {
