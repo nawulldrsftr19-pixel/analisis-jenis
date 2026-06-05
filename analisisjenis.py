@@ -67,9 +67,10 @@ div[data-testid="stMarkdownContainer"] p { color: #94a3b8; }
 
 st.markdown(css_code, unsafe_allow_html=True)
 
-        "rpm": 0,
-        "duration": 0,
-        "tubes": [
+sim_data={
+    "rpm": 0,
+    "duration": 0,
+    "tubes": [
             {"label": "Sampel", "color": "#334155", "liquid_pct": 60, "pellet_pct": 0},
         ],
         "obs": [
