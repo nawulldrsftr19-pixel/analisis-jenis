@@ -326,18 +326,20 @@ if run_centrifuge:
 with col_view:
     st.markdown('<div class="section-label">PROFIL PEMISAHAN FISIS</div>', unsafe_allow_html=True)
     
-    # Render Komponen Tabung Menggunakan Persentase Terkalkulasi
-    st.markdown('<div class="tube-wrap">', unsafe_allow_html=True)
-    tubes_html = ""
-    for t in step_data["tubes"]:
-        p_pct = calc_pellet_pct if "Pellet" in t["label"] else 0
-        tubes_html += render_tube_svg(t["label"], t["color"], t["liquid_pct"], p_pct)
-    st.markdown(f'<div class="tube-wrap">{tubes_html}</div>', unsafe_allow_html=True)
-    
-    for obs in step_data["obs"]:
-        st.markdown(f'<span class="obs-pill" style="border-color:{obs["color"]}"><span style="color:{obs["color"]};">●</span> {obs["text"]} (Tinggi Pelet: {calc_pellet_pct}%)</span>', unsafe_allow_html=True)
-
-    # Log Box Buku Catatan Laboratorium
+   # Render Komponen Tabung Menggunakan Persentase Terkalkulasi
+        tubes_html = ""
+        for t in step_data["tubes"]:
+            p_pct = calc_pellet_pct if "Pellet" in t["label"] else 0
+            tubes_html += render_tube_svg(t["label"], t["color"], t["liquid_pct"], p_pct)
+            
+        # Perbaikan utama: Menggabungkan pembungkus CSS dan grafis SVG dalam satu perintah utuh
+        st.markdown(f'<div class="tube-wrap">{tubes_html}</div>', unsafe_allow_html=True)
+        
+        # Perbaikan tanda bulat dan penutup tag HTML agar teks tidak meluber keluar
+        for obs in step_data["obs"]:
+            st.markdown(f'<span class="obs-pill" style="border-color:{obs["color"]}"><span style="color:{obs["color"]};">●</span> {obs["text"]} (Tinggi Pelet: {calc_pellet_pct}%)</span>', unsafe_allow_html=True)
+   
+# Log Box Buku Catatan Laboratorium
     st.markdown('<div class="section-label" style="margin-top:15px;">LOG REAKSI</div>', unsafe_allow_html=True)
     log_html = '<div class="log-box">'
     for ltype, msg in step_data["log"]:
