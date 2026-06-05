@@ -82,8 +82,13 @@ sim_data_list = [
             {"msg": "Kation potensial: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+"}
         ]
     }
-]
-    }, # Penutup data pertama
+"log": [
+            {"msg": "Sampel dimuat ke tabung sentrifugasi."},
+            {"msg": "Kation potensial: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+"}
+        ]
+    },
+    {
+        "id": "g1", }, # Penutup data pertama
     {  # Pembuka data kedua (Baris 84/85)
         "id": "g1",  
         # ... sisa data Anda di bawahnya ...
