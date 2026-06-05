@@ -67,29 +67,23 @@ div[data-testid="stMarkdownContainer"] p { color: #94a3b8; }
 
 st.markdown(css_code, unsafe_allow_html=True)
 
-sim_data={
-    "rpm": 0,
-    "duration": 0,
-    "tubes": [
-            {"label": "Sampel", "color": "#334155", "liquid_pct": 60, "pellet_pct": 0},
-        ],
-        "obs": [
-            {"color": "#64748b", "text": "Larutan jernih / sedikit keruh"},
-        ],
-        "log": [
 sim_data_list = [
     {
         "rpm": 0,
         "duration": 0,
         "tubes": [
-            {"label": "Sampel", "color": "#334155", "liquid_pct": 60, "pellet_pct": 0},
+            {"label": "Sampel", "color": "#334155", "liquid_pct": 60, "pellet_pct": 0}
         ],
         "obs": [
-            {"color": "#64748b", "text": "Larutan jernih / sedikit keruh"},
+            {"color": "#64748b", "text": "Larutan jernih / sedikit keruh"}
         ],
         "log": [
             {"msg": "Sampel dimuat ke tabung sentrifugasi."},
             {"msg": "Kation potensial: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+"}
+        ]
+    }
+]
+   
         ]
     }, # Penutup data pertama
     {  # Pembuka data kedua (Baris 84/85)
