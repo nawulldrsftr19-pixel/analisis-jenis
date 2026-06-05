@@ -81,7 +81,7 @@ sim_data={
             ("msg",    "Kation potensial: Ag⁺, Pb²⁺, Hg₂²⁺, Fe³⁺, Al³⁺, Ba²⁺, Sr²⁺, Ca²⁺"),
         ],
     },
-    {
+    
         "id": "g1",
         "name": "Langkah 1 — Golongan I",
         "reagent": "HCl encer (2M)",
