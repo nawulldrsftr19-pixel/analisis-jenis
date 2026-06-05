@@ -324,23 +324,17 @@ if run_centrifuge:
     st.success(compactness_msg)
 
 with col_view:
-    st.markdown('<div class="section-label">PROFIL PEMISAHAN FISIS</div>', unsafe_allow_html=True)
-    
-# Render Komponen Tabung Menggunakan Persentase Terkalkulasi
+        st.markdown('<div class="section-label">PROFIL PEMISAHAN FISIS</div>', unsafe_allow_html=True)
+        
         tubes_html = ""
         for t in step_data["tubes"]:
             p_pct = calc_pellet_pct if "Pellet" in t["label"] else 0
-            # Perbaikan Baris 333: Memastikan parameter masuk ke fungsi secara tepat sesuai kunci dictionary data
             tubes_html += render_tube_svg(t["label"], t["color"], t["liquid_pct"], p_pct)
             
-        # Perbaikan Baris 336: Menggabungkan pembungkus CSS dan grafis SVG dalam satu perintah utuh
         st.markdown(f'<div class="tube-wrap">{tubes_html}</div>', unsafe_allow_html=True)
         
-        # Perbaikan Baris 341: Memastikan f-string ditutup dengan kutip tunggal dan penutup tag span/div yang valid
         for obs in step_data["obs"]:
-            st.markdown(f'<span class="obs-pill" style="border-color:{obs["color"]}"><span style="color:{obs["color"]};">●</span> {obs["text"]} (Tinggi Pelet: {calc_pellet_pct}%)</span>', unsafe_allow_html=True) 
-# Log Box Buku Catatan Laboratorium
-    st.markdown('<div class="section-label" style="margin-top:15px;">LOG REAKSI</div>', unsafe_allow_html=True)
+            st.markdown(f'<span class="obs-pill" style="border-color:{obs["color"]}"><span style="color:{obs["color"]};">●</span> {obs["text"]} (Tinggi Pelet: {calc_pellet_pct}%)</span>', unsafe_allow_html=True)
     log_html = '<div class="log-box">'
     for ltype, msg in step_data["log"]:
         tag = '<span class="log-react">Rxn:</span>' if ltype == "react" else '<span>Info:</span>'
