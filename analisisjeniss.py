@@ -161,12 +161,4 @@ st.sidebar.markdown("""
 2. **Kecepatan**: Aplikasi ini mensimulasikan putaran **3000 rpm** [1].
 3. **Pemisahan**: Ambil supernatan perlahan tanpa mengganggu pellet di dasar tabung [3].
 """)
-Keunggulan Pembaruan Ini:
-Visualisasi Tabung Lebih Nyata: Menggunakan CSS box-shadow dan linear-gradient untuk menciptakan efek tabung kaca tiga dimensi yang transparan.
-Perbedaan Larutan & Endapan:
-Supernatan: Direpresentasikan sebagai lapisan atas yang jernih (rgba transparan).
-Pellet: Direpresentasikan sebagai lapisan padat di bagian paling bawah tabung dengan warna yang sesuai dengan reaksi kimia (misalnya hitam untuk merkuri atau kuning untuk timbal).
-Animasi Transisi: Saat tombol ditekan, aplikasi akan menunjukkan kondisi "Cloudy" (keruh/bercampur) terlebih dahulu sebelum perlahan-lahan berubah menjadi jernih dengan endapan di bawah setelah proses sentrifugasi selesai.
-Tema Biru yang Menarik: Menggunakan palet warna biru muda hingga biru tua untuk memberikan kesan profesional laboratorium modern.
-Interaktivitas: Menggunakan tabs dan selectbox agar pengguna bisa fokus pada satu golongan kation pada satu waktu, sesuai dengan prosedur bertahap dalam sumber.
-Anda dapat menjalankan kode ini dengan perintah streamlit run nama_file.py untuk melihat animasinya secara langsung.
+
