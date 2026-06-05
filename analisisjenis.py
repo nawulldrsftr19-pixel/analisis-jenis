@@ -66,7 +66,6 @@ div[data-testid="stMarkdownContainer"] p { color: #94a3b8; }
 """
 
 st.markdown(css_code, unsafe_allow_html=True)
-
 sim_data_list = [
     {
         "rpm": 0,
@@ -81,13 +80,7 @@ sim_data_list = [
             {"msg": "Sampel dimuat ke tabung sentrifugasi."},
             {"msg": "Kation potensial: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+"}
         ]
-    }
-"log": [
-            {"msg": "Sampel dimuat ke tabung sentrifugasi."},
-            {"msg": "Kation potensial: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Sr2+, Ca2+"}
-        ]
     },
-    {
         "id": "g1", }, # Penutup data pertama
     {  # Pembuka data kedua (Baris 84/85)
         "id": "g1",  
