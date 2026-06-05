@@ -32,6 +32,26 @@ html, body, [data-testid="stAppViewContainer"] {
     padding: 20px 24px;
     margin-bottom: 16px;
 }
+.rxn-card {
+    background: #1a2235;
+    border: 1px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: border-color .25s;
+}
+.rxn-card:hover {
+    border-color: #7c3aed;
+}
+.equation-box {
+    background: #0a0e1a;
+    border: 1px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: #c4b5fd;
+}
 .section-label {
     font-family: 'Space Mono', monospace;
     font-size: 11px;
@@ -178,59 +198,59 @@ sim_data_list = [
         "name": "Persiapan Sampel Awal",
         "reagent": "Campuran Kation",
         "base_pellet": 0,
-        "desc": "Larutan awal mengandung kation golongan I, III, dan IV sebelum separasi.",
+        "desc": "Larutan awal mengandung campuran kation golongan I, III, dan IV sebelum separasi berurutan dilakukan.",
         "tubes": [{"label": "Sampel", "color": "#334155", "liquid_pct": 60}],
         "obs": [{"color": "#64748b", "text": "Larutan awal keruh homogen"}],
-        "log": [("msg", "Sampel siap dianalisis."), ("msg", "Kation: Ag+, Pb2+, Fe3+, Ba2+, Ca2+")]
+        "log": [("msg", "Sampel baru dimuat ke sistem."), ("msg", "Kation terdeteksi: Ag+, Pb2+, Hg22+, Fe3+, Al3+, Ba2+, Ca2+")]
     },
     {
         "id": "g1",
-        "name": "Langkah 1 — Golongan I",
+        "name": "Langkah 1 — Pengendapan Golongan I",
         "reagent": "HCl 6M",
         "base_pellet": 16,
-        "desc": "Penambahan HCl mengendapkan kation klorida tidak larut (Golongan I).",
+        "desc": "Penambahan klorida encer memaksa kation Golongan I mengendap sebagai padatan garam klorida putih.",
         "tubes": [
             {"label": "Supernatan", "color": "#1e40af", "liquid_pct": 50},
             {"label": "Pellet G-I", "color": "#e2e8f0", "liquid_pct": 20}
         ],
-        "obs": [{"color": "#e2e8f0", "text": "Endapan putih klorida terbentuk"}],
+        "obs": [{"color": "#e2e8f0", "text": "Endapan putih klorida terbentuk (AgCl, PbCl₂, Hg₂Cl₂)"}],
         "log": [
-            ("react", "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)↓"),
-            ("react", "Pb²⁺(aq) + 2Cl⁻(aq) → PbCl₂(s)↓"),
-            ("result", "Sentrifugasi memisahkan Golongan I dari filtrat sisa.")
+            ("react", "Ag⁺(aq) + Cl⁻(aq) → AgCl(s)↓ [Ksp = 1.8×10⁻¹⁰]"),
+            ("react", "Pb²⁺(aq) + 2Cl⁻(aq) → PbCl₂(s)↓ [Ksp = 1.6×10⁻⁵]"),
+            ("result", "Sentrifugasi memisahkan pelet klorida dari filtrat kation atas.")
         ]
     },
     {
         "id": "g3",
-        "name": "Langkah 2 — Golongan III",
+        "name": "Langkah 2 — Pengendapan Golongan III",
         "reagent": "NH₄OH 6M",
         "base_pellet": 22,
-        "desc": "Supernatan ditambah buffer basa amonia mengendapkan hidroksida (Golongan III).",
+        "desc": "Cairan sisa filtrat Langkah 1 diakumulasikan lalu direaksikan dengan amonia untuk mengikat gugus hidroksida.",
         "tubes": [
             {"label": "Supernatan", "color": "#0284c7", "liquid_pct": 45},
             {"label": "Pellet G-III", "color": "#b45309", "liquid_pct": 15}
         ],
-        "obs": [{"color": "#b45309", "text": "Endapan cokelat kemerahan Fe(OH)₃"}],
+        "obs": [{"color": "#b45309", "text": "Endapan cokelat kemerahan Fe(OH)₃ & putih gelatin Al(OH)₃"}],
         "log": [
-            ("react", "Fe³⁺(aq) + 3OH⁻(aq) → Fe(OH)₃(s)↓"),
-            ("result", "Filtrat dipisahkan untuk pengujian logam alkali tanah.")
+            ("react", "Fe³⁺(aq) + 3OH⁻(aq) → Fe(OH)₃(s)↓ [Ksp = 4×10⁻³⁸]"),
+            ("result", "Filtrat jernih dipisahkan kembali menuju cawan pengujian logam alkali tanah.")
         ]
     },
     {
         "id": "g4",
-        "name": "Langkah 3 — Golongan IV",
+        "name": "Langkah 3 — Pengendapan Golongan IV",
         "reagent": "(NH₄)₂CO₃",
         "base_pellet": 14,
-        "desc": "Karbonasi supernatan terakhir mengisolasi endapan kalsium dan barium.",
+        "desc": "Karbonasi sisa larutan mengisolasi ion kalsium dan barium menjadi endapan karbonat.",
         "tubes": [
             {"label": "Supernatan", "color": "#0ea5e9", "liquid_pct": 40},
             {"label": "Pellet G-IV", "color": "#ffffff", "liquid_pct": 10}
         ],
-        "obs": [{"color": "#ffffff", "text": "Endapan karbonat putih masif"}],
+        "obs": [{"color": "#ffffff", "text": "Endapan karbonat putih masif (BaCO₃ & CaCO₃)"}],
         "log": [
             ("react", "Ba²⁺(aq) + CO₃²⁻(aq) → BaCO₃(s)↓"),
             ("react", "Ca²⁺(aq) + CO₃²⁻(aq) → CaCO₃(s)↓"),
-            ("result", "Pellet putih siap dilarutkan kembali untuk uji nyala.")
+            ("result", "Pemisahan fisis basah selesai, pelet siap dilakukan destruksi kawat nikrom.")
         ]
     }
 ]
@@ -255,14 +275,15 @@ def render_tube_svg(label, liquid_color, liquid_pct, pellet_pct):
     </div>
     """
 
-# ─── HEADER ───────────────────────────────────────────────────────────────────
+# ─── HEADER UTAMA ─────────────────────────────────────────────────────────────
 st.markdown('<div class="section-label">Laboratorium Virtual Interaktif v2.0</div>', unsafe_allow_html=True)
 st.markdown('<div class="hero-title">ANALISIS KATION & UJI NYALA</div>', unsafe_allow_html=True)
 st.markdown('<div class="hero-sub">Simulasi Sentrifugasi Dinamis & Eksitasi Spektroskopi Visual</div>', unsafe_allow_html=True)
 
+# Pembuatan Struktur Menu Tab
 tab_sim, tab_flame = st.tabs(["🧪 SENTRIFUGASI DINAMIS", "🔥 UJI NYALA (GOLONGAN IV)"])
 
-# 📌 TAB 1: SENTRIFUGASI DENGAN RPM DAN DURASI MEMENGARUHI ENDAPAN
+# 📌 TAB 1: SENTRIFUGASI UTAMA & KALKULASI PELET DINAMIS
 with tab_sim:
     col_ctrl, col_view = st.columns([1, 1.2])
     
@@ -270,16 +291,140 @@ with tab_sim:
         st.markdown('<div class="section-label">PILIH TAHAPAN UTAMA</div>', unsafe_allow_html=True)
         step_names = [d["name"] for d in sim_data_list]
         selected_step = st.radio("Pilih Tahap:", step_names, label_visibility="collapsed")
-        step_data = next(d for d in sim_data_list if d["name"] == selected_step)
+    # ─── LOGIKA KONTROL & VISUALISASI UTAMA (Lanjutan Tab 1) ──────────────────────
+step_data = next(d for d in sim_data_list if d["name"] == selected_step)
+
+st.markdown(f'<p style="font-size:13px;">{step_data["desc"]}</p>', unsafe_allow_html=True)
+st.markdown('<div class="section-label" style="margin-top:10px;">KONFIGURASI SENTRIFUGAL</div>', unsafe_allow_html=True)
+
+input_rpm = st.slider("Kecepatan Putaran (RPM):", min_value=0, max_value=6000, value=3000, step=500)
+input_time = st.slider("Durasi Waktu (Detik):", min_value=0, max_value=180, value=90, step=30)
+
+# Logika Matematika Kompaksi Endapan Berdasarkan Nilai G-Force Relatif (RPM & Waktu)
+if input_rpm == 0 or input_time == 0:
+    calc_pellet_pct = 0
+    compactness_msg = "Reagen tercampur, koloid partikel masih melayang bebas di dalam fasa air."
+else:
+    efficiency = min((input_rpm / 4000) * (input_time / 120), 1.2)
+    calc_pellet_pct = int(step_data["base_pellet"] * efficiency)
+    if efficiency < 0.6:
+        compactness_msg = "⚠️ Pelet longgar & keruh: Gaya sentrifugal tidak mencukupi untuk memisahkan fase koloid."
+    elif efficiency <= 1.0:
+        compactness_msg = "✅ Pelet terbentuk normal dan terkompaksi dengan batas interfase yang jernih."
+    else:
+        compactness_msg = "⚡ Pelet super-kompak terbentuk di dasar tabung akibat paparan gaya G-Force tinggi."
+
+run_centrifuge = st.button("MULAI SENTRIFUGASI ⚡", use_container_width=True, disabled=(input_rpm == 0))
+if run_centrifuge:
+    progress_bar = st.empty()
+    for i in range(1, 101):
+        progress_bar.markdown(f'<div class="progress-bar-bg"><div class="progress-bar-fill" style="width: {i}%"></div></div>', unsafe_allow_html=True)
+        time.sleep(0.005)
+    progress_bar.empty()
+    st.success(compactness_msg)
+
+with col_view:
+    st.markdown('<div class="section-label">PROFIL PEMISAHAN FISIS</div>', unsafe_allow_html=True)
+    
+    # Render Komponen Tabung Menggunakan Persentase Terkalkulasi
+    st.markdown('<div class="tube-wrap">', unsafe_allow_html=True)
+    tubes_html = ""
+    for t in step_data["tubes"]:
+        p_pct = calc_pellet_pct if "Pellet" in t["label"] else 0
+        tubes_html += render_tube_svg(t["label"], t["color"], t["liquid_pct"], p_pct)
+    st.markdown(f'<div class="tube-wrap">{tubes_html}</div>', unsafe_allow_html=True)
+    
+    for obs in step_data["obs"]:
+        st.markdown(f'<span class="obs-pill" style="border-color:{obs["color"]}"><span style="color:{obs["color"]};">●</span> {obs["text"]} (Tinggi Pelet: {calc_pellet_pct}%)</span>', unsafe_allow_html=True)
+
+    # Log Box Buku Catatan Laboratorium
+    st.markdown('<div class="section-label" style="margin-top:15px;">LOG REAKSI</div>', unsafe_allow_html=True)
+    log_html = '<div class="log-box">'
+    for ltype, msg in step_data["log"]:
+        tag = '<span class="log-react">Rxn:</span>' if ltype == "react" else '<span>Info:</span>'
+        log_html += f'<div><span class="log-time">[{time.strftime("%H:%M:%S")}]</span> {tag} {msg}</div>'
+    log_html += '</div>'
+    st.markdown(log_html, unsafe_allow_html=True)
+
+# 📌 TAB 2: INTERAKTIF UJI NYALA BALSAM BUNSEN (GOLONGAN IV)
+with tab_flame:
+    st.markdown('<div class="section-label">UJI NYALA (FLAME TEST) LOGAM ALKALI TANAH</div>', unsafe_allow_html=True)
+    st.write("Identifikasi kation Golongan IV dilakukan dengan melarutkan sebagian pelet karbonat dalam sedikit HCl pekat, mencelupkan kawat nikrom, dan membakarnya langsung pada zona panas Bunsen.")
+
+    col_fl_ctrl, col_fl_view = st.columns(2)
+    
+    with col_fl_ctrl:
+        kation_selected = st.selectbox(
+            "Pilih Kation Golongan IV untuk Diteliti:",
+            ["Belum Memilih Kation", "Barium (Ba²⁺)", "Kalsium (Ca²⁺)", "Stronsium (Sr²⁺)"]
+        )
         
-        st.markdown(f'<p style="font-size:13px;">{step_data["desc"]}</p>', unsafe_allow_html=True)
-        
-        st.markdown('<div class="section-label" style="margin-top:10px;">KONFIGURASI SENTRIFUGAL</div>', unsafe_allow_html=True)
-        input_rpm = st.slider("Kecepatan Putaran (RPM):", min_value=0, max_value=6000, value=3000, step=500)
-        input_time = st.slider("Durasi Waktu (Detik):", min_value=0, max_value=180, value=90, step=30)
-        
-        # Matematika Kompaksi Endapan: Efisiensi pengandapan dihitung dari RPM dan waktu
-        if input_rpm == 0 or input_time == 0:
-            calc_pellet_pct = 0
-            compactness_msg = "Reagen dicampur, partikel masih melayang (belum mengendap)."
+        # Penentuan Spektrum Panjang Gelombang & Warna Emisi Termal Eksitasi Elektron
+        if kation_selected == "Barium (Ba²⁺)":
+            flame_color = "#98fb98"  
+            flame_style = "color: #98fb98;"
+            desc_flame = "Kation **Ba²⁺** memancarkan radiasi emisi foton dengan panjang gelombang dominan di spektrum hijau, memberikan tampilan visual **Hijau Apel** yang khas."
+        elif kation_selected == "Kalsium (Ca²⁺)":
+            flame_color = "#ff4500"  
+            flame_style = "color: #ff4500;"
+            desc_flame = "Kation **Ca²⁺** menghasilkan emisi termal dengan pendaran warna **Merah Bata (Jingga Kemerahan Tua)** saat elektron kembali ke kondisi ground state."
+        elif kation_selected == "Stronsium (Sr²⁺)":
+            flame_color = "#e60026"  
+            flame_style = "color: #e60026;"
+            desc_flame = "Kation **Sr²⁺** melepaskan energi eksitasi eksklusif pada rentang panjang gelombang merah pekat, menghasilkan warna **Merah Karmin** yang tajam."
         else:
+            flame_color = "#00d4ff"  
+            flame_style = "color: #00d4ff;"
+            desc_flame = "Silakan pilih salah satu kation di atas untuk memulai simulasi pembakaran sampel kawat nikrom pada nyala api oksidasi Bunsen."
+
+        st.markdown(f'<div class="lab-card" style="margin-top:15px;">{desc_flame}</div>', unsafe_allow_html=True)
+
+    with col_fl_view:
+        # Tampilan Animasi Interaktif Bunsen Tanpa Bocor Kurung Siku List Python
+        st.markdown(f"""
+        <div class="bunsen-container">
+            <div style="font-family:'Space Mono'; font-size:10px; color:#64748b; margin-bottom:15px; text-transform:uppercase;">Zona Oksidasi Bunsen</div>
+            <div class="flame" style="{flame_style}"></div>
+            <div style="width:25px; height:60px; background:#475569; margin-top:5px; border-radius:3px 3px 0 0;"></div>
+            <div style="width:50px; height:10px; background:#334155; border-radius:2px;"></div>
+            <div style="font-size:11px; margin-top:12px; font-weight:bold; color:{flame_color}; font-family:'Space Mono';">
+                Spektrum Warna: {kation_selected}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ─── TABEL DATA REFERENSI TEKNIS ──────────────────────────────────────────────
+st.markdown('<div class="section-label" style="margin-top:30px;">KONSTANTA KELARUTAN & KARAKTERISTIK GOLONGAN IV</div>', unsafe_allow_html=True)
+st.markdown("""
+<table class="ref-table">
+    <thead>
+        <tr>
+            <th>Kation</th>
+            <th>Bentuk Reaksi Karbonat</th>
+            <th>Warna Nyala Emisi</th>
+            <th>Panjang Gelombang Dominan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Barium (Ba²⁺)</td>
+            <td>Ba²⁺ + CO₃²⁻ → BaCO₃↓ (Putih)</td>
+            <td style="color:#98fb98; font-weight:bold;">Hijau Apel</td>
+            <td>~553 nm</td>
+        </tr>
+        <tr>
+            <td>Kalsium (Ca²⁺)</td>
+            <td>Ca²⁺ + CO₃²⁻ → CaCO₃↓ (Putih)</td>
+            <td style="color:#ff4500; font-weight:bold;">Merah Bata</td>
+            <td>~622 nm</td>
+        </tr>
+        <tr>
+            <td>Stronsium (Sr²⁺)</td>
+            <td>Stronsium (Sr²⁺) + CO₃²⁻ → SrCO₃↓ (Putih)</td>
+            <td style="color:#e60026; font-weight:bold;">Merah Karmin</td>
+            <td>~650 nm</td>
+        </tr>
+    </tbody>
+</table>
+""", unsafe_allow_html=True)
+        
