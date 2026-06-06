@@ -72,24 +72,46 @@ with col_center:
 st.title("Analisis Kualitatif Kation (Golongan I-V)")
 st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
 
-with tab1:
-         st.subheader("Bagan Pemisahan Kation (Mind Map)")
-         st.title("Analisis Kualitatif Kation (Golongan I-V)")
-         st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
+# Pengaturan halaman
+st.set_page_config(page_title="Analisis Kation", layout="wide")
 
-# Inisialisasi state untuk melacak langkah
-if 'langkah' not in st.session_state:
-    st.session_state.langkah = 0
+# --- SIDEBAR ---
+with st.sidebar:
+    st.header("Kontrol Navigasi")
+    st.write("Gunakan menu di bawah untuk melihat tahap pemisahan kation.")
+    
+    # Menggunakan radio button atau slider untuk memilih tahapan
+    pilihan_langkah = st.radio(
+        "Pilih Tahapan Analisis:",
+        ("1. Penambahan HCl (Awal)", 
+         "2. Pemisahan Gol I & III/IV", 
+         "3. Identifikasi Spesifik", 
+         "4. Hasil Akhir (Konfirmasi)")
+    )
+    
+    # Konversi pilihan ke angka untuk fungsi bagan
+    step_map = {
+        "1. Penambahan HCl (Awal)": 1,
+        "2. Pemisahan Gol I & III/IV": 2,
+        "3. Identifikasi Spesifik": 3,
+        "4. Hasil Akhir (Konfirmasi)": 4
+    }
+    langkah = step_map[pilihan_langkah]
+    
+    st.divider()
+    st.info("Bagan ini menunjukkan pemisahan kation golongan I hingga V berdasarkan reaksi kimia spesifik.")
 
-# Fungsi untuk membuat grafik berdasarkan langkah saat ini
+# --- AREA UTAMA ---
+st.title("Bagan Pemisahan Kation (Golongan I-V)")
+
+# Fungsi untuk membuat grafik (Logic tetap sama berdasarkan sumber [1])
 def buat_bagan(step):
     dot = graphviz.Digraph()
-    dot.attr(rankdir='LR', size='10,10')
+    dot.attr(rankdir='LR')
     
-    # Node awal: Campuran Contoh [1]
+    # Node awal
     dot.node('start', 'Campuran Contoh Gol I - V', style='filled', color='lavender')
 
-    # Langkah 1: Penambahan HCl [1]
     if step >= 1:
         dot.node('hcl', '+ HCl encer', shape='plaintext')
         dot.edge('start', 'hcl')
@@ -98,92 +120,29 @@ def buat_bagan(step):
         dot.edge('hcl', 'gol1')
         dot.edge('hcl', 'larutan1')
 
-    # Langkah 2: Pemisahan Lanjutan (H2O Panas & NH4OH) [1]
     if step >= 2:
-        # Sisi Endapan Gol I
-        dot.node('h2o', '+ H2O Panas', shape='plaintext')
-        dot.edge('gol1', 'h2o')
-        dot.node('pb', 'Pb2+', style='filled', color='lightgreen')
-        dot.node('residu1', 'Residu AgCl, Hg2Cl2', style='filled', color='lightgreen')
-        dot.edge('h2o', 'pb')
-        dot.edge('h2o', 'residu1')
-        
-        # Sisi Larutan
+        # Jalur Endapan Gol I
+        dot.edge('gol1', 'Pb2+ & Residu', label='+ H2O Panas')
+        # Jalur Larutan
         dot.node('nh4oh', '+ NH4OH Berlebih', shape='plaintext')
         dot.edge('larutan1', 'nh4oh')
-        dot.node('gol3', 'Endapan Gol III\n(Al(OH)3, Fe(OH)3)', style='filled', color='lightgreen')
-        dot.node('gol4', 'Larutan Gol IV\n(Ba2+, Sr2+, Ca2+)', style='filled', color='lightgreen')
+        dot.node('gol3', 'Endapan Gol III', style='filled', color='lightgreen')
+        dot.node('gol4', 'Larutan Gol IV', style='filled', color='lightgreen')
         dot.edge('nh4oh', 'gol3')
         dot.edge('nh4oh', 'gol4')
 
-    # Langkah 3: Identifikasi & NaOH [1]
     if step >= 3:
-        # Pb identifikasi
-        dot.node('k2cro4_pb', '+ K2CrO4', shape='plaintext')
-        dot.edge('pb', 'k2cro4_pb')
-        dot.node('hasil_pb', 'PbCrO4 (Kuning)', style='filled', color='yellow')
-        dot.edge('k2cro4_pb', 'hasil_pb')
+        dot.edge('gol3', 'Fe(OH)3 & Al(OH)4-', label='+ NaOH')
+        dot.edge('gol4', 'BaCrO4 & Sr/Ca', label='+ K2CrO4')
 
-        # Residu Ag/Hg
-        dot.node('nh4oh_res', '+ NH4OH Berlebih', shape='plaintext')
-        dot.edge('residu1', 'nh4oh_res')
-        dot.node('hg', 'Hg(NH2)Cl + Hg\n(Putih + Hitam)', style='filled', color='grey')
-        dot.node('ag_complex', 'Ag(NH3)2+ Cl-', style='filled', color='lightgreen')
-        dot.edge('nh4oh_res', 'hg')
-        dot.edge('nh4oh_res', 'ag_complex')
-
-        # Endapan Gol III
-        dot.node('naoh', '+ NaOH', shape='plaintext')
-        dot.edge('gol3', 'naoh')
-        dot.node('fe_oh', 'Fe(OH)3', style='filled', color='orange')
-        dot.node('al_oh4', 'Al(OH)4-', style='filled', color='lightgreen')
-        dot.edge('naoh', 'fe_oh')
-        dot.edge('naoh', 'al_oh4')
-
-        # Larutan Gol IV
-        dot.node('k2cro4_iv', '+ K2CrO4', shape='plaintext')
-        dot.edge('gol4', 'k2cro4_iv')
-        dot.node('ba_hasil', 'BaCrO4 (Kuning)', style='filled', color='yellow')
-        dot.node('sr_ca', 'Larutan Sr2+, Ca2+', style='filled', color='lightgreen')
-        dot.edge('k2cro4_iv', 'ba_hasil')
-        dot.edge('k2cro4_iv', 'sr_ca')
-
-    # Langkah 4: Hasil Akhir [1]
     if step >= 4:
-        # Perak (Ag)
-        dot.node('hno3_ag', '+ HNO3', shape='plaintext')
-        dot.edge('ag_complex', 'hno3_ag')
-        dot.node('ag_hasil', 'AgCl (Putih)', style='filled', color='white')
-        dot.edge('hno3_ag', 'ag_hasil')
-
-        # Besi (Fe)
-        dot.edge('fe_oh', 'Fe3+', label='+ HNO3')
-        dot.edge('fe_oh', 'Fe(SCN)3 (Merah)', label='+ SCN-')
-
-        # Aluminium (Al)
-        dot.edge('al_oh4', 'Al(OH)3 (Putih) ', label='+ HCl / Na2CO3')
-
-        # Sr & Ca
-        dot.edge('sr_ca', 'CaC2O4 (Putih)', label='+ CH3COOH, H2C2O4, NH4OH')
-        dot.edge('sr_ca', 'SrCO3 (Putih)', label='+ Na2CO3')
-
+        dot.node('end', 'Identifikasi Akhir\n(AgCl, Fe3+, Al(OH)3, dll)', shape='doublecircle')
+        dot.edge('gol3', 'end', style='dotted')
+    
     return dot
 
-# Menampilkan Bagan
-st.graphviz_chart(buat_bagan(st.session_state.langkah))
-
-# Kontrol Tombol
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Lanjut ke Langkah Berikutnya ➡️"):
-        if st.session_state.langkah < 4:
-            st.session_state.langkah += 1
-            st.rerun()
-with col2:
-    if st.button("Reset Bagan 🔄"):
-        st.session_state.langkah = 0
-        st.rerun()
-
+# Menampilkan bagan di area utama
+st.graphviz_chart(buat_bagan(langkah))
 
     # --- TAB 2: ANALISIS KATION ---
     with tab2:
