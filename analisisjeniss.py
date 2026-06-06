@@ -67,6 +67,8 @@ with col_center:
     tab1, tab2, tab3 = st.tabs(["📊 Bagan Alir (Mind Map)", "🔹 Analisis Kation", "🧪 Analisis Anion"])
 
     # --- TAB 1: BAGAN ALIR ---
+import graphviz
+
     with tab1:
          st.subheader("Bagan Pemisahan Kation (Mind Map)")
          st.title("Analisis Kualitatif Kation (Golongan I-V)")
