@@ -231,29 +231,31 @@ with tab3:
         st.write("Jika KI berlebih → (HgI₄)²⁻ (Larutan Kuning)")
         tube_viz("yellow","red",35)
 
-    elif anion=="Karbonat (CO₃²⁻)":
-        st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) \uparrow + H_2O")
-        st.write("Uji: gelembung gas CO₂ terbentuk.")
-        # animasi gelembung
-        st.markdown("""
-        <style>
-        .bubble-container {position:relative;width:100px;height:150px;background:#e0f7fa;border-radius:10px;margin:10px;}
-        .bubble {position:absolute;bottom:0;width:20px;height:20px;border-radius:50%;background:#80deea;animation: rise 3s infinite;}
-        .bubble:nth-child(2){left:30px;animation-delay:1s;}
-        .bubble:nth-child(3){left:60px;animation-delay:2s;}
-        @keyframes rise {
-            0% {bottom:0;opacity:1;}
-            100% {bottom:130px;opacity:0;}
-        }
-        </style>
-        <div class="bubble-container">
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-        """, unsafe_allow_html=True)
+elif anion=="Karbonat (CO₃²⁻)":
+    st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) \uparrow + H_2O")
+    st.write("Uji: terbentuk gelembung gas CO₂ yang keluar dari larutan.")
+    # animasi gelembung
+    st.markdown("""
+    <style>
+    .bubble-container {position:relative;width:100px;height:150px;background:#e0f7fa;border-radius:10px;margin:10px;}
+    .bubble {position:absolute;bottom:0;width:20px;height:20px;border-radius:50%;background:#80deea;animation: rise 3s infinite;}
+    .bubble:nth-child(2){left:30px;animation-delay:1s;}
+    .bubble:nth-child(3){left:60px;animation-delay:2s;}
+    @keyframes rise {
+        0% {bottom:0;opacity:1;}
+        100% {bottom:130px;opacity:0;}
+    }
+    </style>
+    <div class="bubble-container">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    elif anion=="Sulfat (SO₄²⁻)":
-        st.latex(r"SO_4^{2-} + BaCl_2 \rightarrow BaSO_4(s) \downarrow + 2Cl^-")
-        tube_viz("lightblue","white",35)
+elif anion=="Sulfat (SO₄²⁻)":
+    st.latex(r"SO_4^{2-} + BaCl_2 \rightarrow BaSO_4(s) \downarrow + 2Cl^-")
+    st.write("Uji: terbentuk endapan putih BaSO₄ yang tidak larut dalam asam.")
+    tube_viz("lightblue","white",35)
+
 
