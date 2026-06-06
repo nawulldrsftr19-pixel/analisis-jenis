@@ -3,8 +3,9 @@ import streamlit as st
 st.set_page_config(page_title="Mind Map Analisis Kation", page_icon="⚗️", layout="wide")
 
 st.title("🧪 Mind Map Interaktif — Analisis Kualitatif Kation Gol I–V")
+st.write("Mind map dengan garis panah ke bawah. Klik tombol di bawah untuk detail reaksi.")
 
-# ─── BAGAN VISUAL ─────────────────────────────────────────────────────────────
+# ─── VISUAL MIND MAP ─────────────────────────────────────────────────────────────
 st.graphviz_chart("""
 digraph {
     node [shape=box, style=filled, color=lightblue, fontname="Helvetica"];
@@ -30,4 +31,14 @@ digraph {
 }
 """)
 
+# ─── NODE DETAIL INTERAKTIF ─────────────────────────────────────────────────────
+st.subheader("🔍 Klik tombol node untuk detail reaksi")
 
+col1, col2 = st.columns(2)
+
+with col1:
+    if st.button("Campuran Gol I–V"):
+        st.info("Larutan awal mengandung campuran kation Golongan I–V.")
+    if st.button("Endapan Gol I (Ag, Pb, Hg)"):
+        st.success("Endapan putih klorida terbentuk (AgCl, PbCl₂, Hg₂Cl₂).")
+    if st
