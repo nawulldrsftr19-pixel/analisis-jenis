@@ -1,7 +1,62 @@
 import streamlit as st
 import time
 import graphviz
- 
+
+import streamlit as st
+
+st.title("📚 Materi Kation dan Anion")
+
+materi = st.selectbox(
+    "Pilih Materi",
+    ["Kation", "Anion"]
+)
+
+if materi == "Kation":
+
+    st.subheader("Pengertian Kation")
+
+    st.write("""
+    Kation adalah ion bermuatan positif yang terbentuk karena kehilangan elektron.
+    Pada praktikum ini kation dipisahkan berdasarkan pereaksi tertentu sehingga
+    dapat diidentifikasi secara sistematis.
+    """)
+
+    st.markdown("""
+    **Kation yang digunakan:**
+
+    **Golongan I**
+    - Ag⁺
+    - Pb²⁺
+    - Hg₂²⁺
+
+    **Golongan III**
+    - Al³⁺
+    - Fe³⁺
+
+    **Golongan V**
+    - Ba²⁺
+    - Sr²⁺
+    - Ca²⁺
+    """)
+
+elif materi == "Anion":
+
+    st.subheader("Pengertian Anion")
+
+    st.write("""
+    Anion adalah ion bermuatan negatif yang terbentuk karena menerima elektron.
+    Identifikasi anion dilakukan menggunakan pereaksi spesifik yang menghasilkan
+    perubahan warna, pembentukan endapan, atau gas.
+    """)
+
+    st.markdown("""
+    **Anion yang digunakan:**
+
+    - Cl⁻ (Klorida)
+    - I⁻ (Iodida)
+    - CO₃²⁻ (Karbonat)
+    - SO₄²⁻ (Sulfat)
+    """)
 # --- Judul utama ---
 st.title("LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik")
 
