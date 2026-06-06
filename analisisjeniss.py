@@ -123,4 +123,4 @@ with tab3:
         tube_viz("yellow","red",35)
     elif anion=="Karbonat (CO₃²⁻)":
         st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) ↑ + H_2O")
-        st.write("Uji: gelembung gas
+        st.write("Uji: gelembung gas")
