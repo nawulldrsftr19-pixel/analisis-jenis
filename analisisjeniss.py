@@ -2,77 +2,55 @@ import streamlit as st
 
 st.set_page_config(page_title="Analisis Kualitatif Kation", page_icon="⚗️", layout="wide")
 
-st.title("Laboratorium Virtual — Analisis Kualitatif Kation Gol I–V")
-st.write("Simulasi interaktif berdasarkan bagan analisis kation.")
+st.title("🧪 Laboratorium Virtual — Analisis Kualitatif Kation Gol I–V")
+st.write("Klik tab dan langkah untuk melihat hasil reaksi sesuai bagan analisis.")
 
 # ─── TAB MENU ───────────────────────────────────────────────────────────────
-tab_g1, tab_g3, tab_g4, tab_g5 = st.tabs([
+tab_g1, tab_g3, tab_g4, tab_summary = st.tabs([
     "Golongan I (Ag, Pb, Hg)",
     "Golongan III (Al, Fe)",
     "Golongan IV (Ba, Sr, Ca)",
-    "Ringkasan"
+    "📖 Ringkasan"
 ])
 
 # 📌 TAB GOLONGAN I
 with tab_g1:
-    st.subheader("Pengendapan Golongan I")
-    step = st.radio("Pilih langkah:", [
-        "Campuran + HCl Encer",
-        "Endapan Pb²⁺ + H₂O Panas",
-        "Pb²⁺ + K₂CrO₄ → PbCrO₄ (Kuning)",
-        "Endapan AgCl & Hg₂Cl₂ + NH₄OH",
-        "Hg(NH₂)Cl + Hg (Putih/Hitam)",
-        "Ag(NH₃)₂⁺ + HNO₃ → AgCl (Putih)"
-    ])
-    if "PbCrO₄" in step:
-        st.success("Terbentuk endapan kuning PbCrO₄")
-    elif "AgCl" in step:
-        st.info("Terbentuk endapan putih AgCl")
-    elif "Hg" in step:
-        st.warning("Terbentuk endapan putih/ hitam Hg(NH₂)Cl + Hg")
-    else:
-        st.write("Langkah dipilih:", step)
+    st.header("Golongan I — Ag, Pb, Hg")
+    with st.expander("Campuran + HCl Encer"):
+        st.info("Terbentuk endapan putih klorida (AgCl, PbCl₂, Hg₂Cl₂).")
+    with st.expander("Pb²⁺ + H₂O Panas"):
+        st.success("Pb²⁺ larut → lanjut uji dengan K₂CrO₄.")
+    with st.expander("Pb²⁺ + K₂CrO₄"):
+        st.markdown("**Endapan kuning PbCrO₄ terbentuk.**")
+    with st.expander("AgCl & Hg₂Cl₂ + NH₄OH"):
+        st.warning("Hg(NH₂)Cl + Hg (putih/hitam), Ag(NH₃)₂⁺ larut.")
+    with st.expander("Ag(NH₃)₂⁺ + HNO₃"):
+        st.info("Endapan putih AgCl kembali terbentuk.")
 
 # 📌 TAB GOLONGAN III
 with tab_g3:
-    st.subheader("Pengendapan Golongan III")
-    step = st.radio("Pilih langkah:", [
-        "Filtrat + NH₄OH → Endapan (Al, Fe)",
-        "Fe(OH)₃ Endapan",
-        "Fe³⁺ + SCN⁻ → Fe(SCN)₃ (Merah)",
-        "Al(OH)₄⁻ Larutan",
-        "Al(OH)₃ Endapan Putih"
-    ])
-    if "Fe(SCN)₃" in step:
-        st.success("Larutan merah darah terbentuk (Fe(SCN)₃)")
-    elif "Al(OH)₃" in step:
-        st.info("Endapan putih Al(OH)₃ terbentuk")
-    else:
-        st.write("Langkah dipilih:", step)
+    st.header("Golongan III — Al, Fe")
+    with st.expander("Filtrat + NH₄OH"):
+        st.info("Endapan hidroksida terbentuk (Al(OH)₃, Fe(OH)₃).")
+    with st.expander("Fe(OH)₃ + HNO₃ + SCN⁻"):
+        st.success("Larutan merah darah Fe(SCN)₃ terbentuk.")
+    with st.expander("Al(OH)₄⁻ Larutan"):
+        st.write("Al(OH)₄⁻ tetap larut dalam NaOH berlebih.")
+    with st.expander("Al(OH)₃ Endapan"):
+        st.info("Endapan putih Al(OH)₃ terbentuk kembali.")
 
 # 📌 TAB GOLONGAN IV
 with tab_g4:
-    st.subheader("Pengendapan Golongan IV")
-    step = st.radio("Pilih langkah:", [
-        "Filtrat (Ba, Sr, Ca) + K₂CrO₄",
-        "Ba²⁺ → BaCrO₄ (Kuning)",
-        "Sr²⁺ + Na₂CO₃ → SrCO₃ (Putih)",
-        "Ca²⁺ + H₂C₂O₄ + NH₄OH → CaC₂O₄ (Putih)"
-    ])
-    if "BaCrO₄" in step:
-        st.success("Endapan kuning BaCrO₄ terbentuk")
-    elif "SrCO₃" in step:
-        st.info("Endapan putih SrCO₃ terbentuk")
-    elif "CaC₂O₄" in step:
-        st.warning("Endapan putih CaC₂O₄ terbentuk")
-    else:
-        st.write("Langkah dipilih:", step)
+    st.header("Golongan IV — Ba, Sr, Ca")
+    with st.expander("Filtrat (Ba, Sr, Ca) + K₂CrO₄"):
+        st.success("Ba²⁺ → Endapan kuning BaCrO₄.")
+    with st.expander("Sr²⁺ + Na₂CO₃"):
+        st.info("Endapan putih SrCO₃ terbentuk.")
+    with st.expander("Ca²⁺ + H₂C₂O₄ + NH₄OH"):
+        st.warning("Endapan putih CaC₂O₄ terbentuk.")
 
 # 📌 TAB RINGKASAN
-with tab_g5:
-    st.subheader("Ringkasan Analisis")
-    st.write("""
-    - **Gol I**: Ag, Pb, Hg dipisahkan dengan HCl → endapan klorida.
-    - **Gol III**: Al, Fe dipisahkan dengan NH₄OH → endapan hidroksida.
-    - **Gol IV**: Ba, Sr, Ca dipisahkan dengan K₂CrO₄, Na₂CO₃, H₂C₂O₄.
-    """)
+with tab_summary:
+    st.header("Ringkasan Analisis Golongan I–IV")
+    st.markdown("""
+    - **Gol I**: Ag, Pb, Hg → endapan kl
