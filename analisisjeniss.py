@@ -1,5 +1,5 @@
 import streamlit as st
-import time
+import graphviz
 
 # --- KONFIGURASI HALAMAN ---
 st.set_page_config(page_title="Virtual Lab: Analisis Kualitatif", layout="wide")
@@ -67,9 +67,6 @@ with col_center:
     tab1, tab2, tab3 = st.tabs(["📊 Bagan Alir (Mind Map)", "🔹 Analisis Kation", "🧪 Analisis Anion"])
 
     # --- TAB 1: BAGAN ALIR ---
-import streamlit as st
-import graphviz
-
 # Judul aplikasi berdasarkan sumber [1]
 st.title("Analisis Kualitatif Kation (Golongan I-V)")
 st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
