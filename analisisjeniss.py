@@ -145,7 +145,7 @@ def buat_bagan(step):
 st.graphviz_chart(buat_bagan(langkah))
 
     # --- TAB 2: ANALISIS KATION ---
-    with tab2:
+with tab2:
         st.subheader("🛠️ Simulasi Pemisahan Kation [2, 3]")
         gol = st.selectbox("Pilih Golongan Kation:", ["Golongan I", "Golongan III", "Golongan IV"])
         
