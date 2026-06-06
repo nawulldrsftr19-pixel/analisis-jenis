@@ -425,6 +425,7 @@ if st.button("Lihat Hasil"):
 
     if jawab10 == "SO₄²⁻":
         skor += 10
+        st.session_state.skor = skor
 
 # tampilkan skor kalau sudah dihitung
 if "skor" in st.session_state:
