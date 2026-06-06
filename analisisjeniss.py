@@ -69,11 +69,8 @@ with col_center:
     # --- TAB 1: BAGAN ALIR ---
     with tab1:
          st.subheader("Bagan Pemisahan Kation (Mind Map)")
-    # Menampilkan Mind Map dari sumber [1]
-        st.image("bagan pemisahan kation.png", use_column_width=True)
-    # Judul aplikasi berdasarkan sumber [1]
-st.title("Analisis Kualitatif Kation (Golongan I-V)")
-st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
+         st.title("Analisis Kualitatif Kation (Golongan I-V)")
+         st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
 
 # Inisialisasi state untuk melacak langkah
 if 'langkah' not in st.session_state:
