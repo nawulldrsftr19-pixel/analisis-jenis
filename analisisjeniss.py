@@ -36,4 +36,4 @@ st.subheader("🔍 Klik node di bawah untuk detail reaksi")
 with st.expander("Campuran Gol I–V"):
     st.info("Larutan awal mengandung campuran kation Golongan I–V.")
 
-with st.expander("Endapan Gol I (Ag, Pb, Hg")
+with st.expander("Endapan Gol I (Ag, Pb, Hg") :
