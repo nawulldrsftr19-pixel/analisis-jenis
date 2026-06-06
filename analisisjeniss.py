@@ -147,8 +147,3 @@ with col_center:
             if st.button("Simulasikan Reaksi SO4 2-"):
                 render_tube("rgba(200,230,255,0.2)", "white", 40)
 
-# --- SIDEBAR FOOTER ---
-st.sidebar.markdown("---")
-st.sidebar.warning("⚠️ **Peringatan Keselamatan**: Pastikan tabung seimbang saat sentrifugasi agar tidak merusak alat [5].")
-st.sidebar.info("Aplikasi ini menggunakan prinsip pemisahan gaya sentrifugal sesuai dokumen analisis kation [1].")
-Penjelasan Fitur & Perubahan Utama:
