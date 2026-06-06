@@ -54,3 +54,4 @@ with tab_summary:
     st.header("Ringkasan Analisis Golongan I–IV")
     st.markdown("""
     - **Gol I**: Ag, Pb, Hg → endapan kl
+    """)
