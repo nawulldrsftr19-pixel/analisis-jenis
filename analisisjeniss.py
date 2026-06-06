@@ -110,17 +110,42 @@ with tab2:
         flame_viz("#ff4500"); st.write("Nyala merah bata")
         st.latex(r"Ca^{2+} + C_2O_4^{2-} \rightarrow CaC_2O_4 (Putih)")
 
-# --- TAB 3: ANALISIS ANION (dengan animasi) ---
+# --- TAB 3: ANALISIS ANION (lengkap + animasi gelembung) ---
 with tab3:
     st.subheader("📝 Analisis Anion")
     anion = st.selectbox("Pilih Anion:",["Klorida (Cl⁻)","Iodida (I⁻)","Karbonat (CO₃²⁻)","Sulfat (SO₄²⁻)"])
+    
     if anion=="Klorida (Cl⁻)":
-        st.latex(r"Cl^- + AgNO_3 \rightarrow AgCl (Putih)")
+        st.latex(r"Cl^- + AgNO_3 \rightarrow AgCl(s) \downarrow \text{ (Putih)}")
         tube_viz("lightblue","white",35)
+
     elif anion=="Iodida (I⁻)":
-        st.latex(r"2I^- + HgCl_2 \rightarrow HgI_2 (Merah)")
+        st.latex(r"2I^- + HgCl_2 \rightarrow HgI_2(s) \downarrow \text{ (Merah)}")
         st.write("Jika KI berlebih → (HgI₄)²⁻ (Larutan Kuning)")
         tube_viz("yellow","red",35)
+
     elif anion=="Karbonat (CO₃²⁻)":
-        st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) ↑ + H_2O")
-        st.write("Uji: gelembung gas")
+        st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) \uparrow + H_2O")
+        st.write("Uji: gelembung gas CO₂ terbentuk.")
+        # animasi gelembung
+        st.markdown("""
+        <style>
+        .bubble-container {position:relative;width:100px;height:150px;background:#e0f7fa;border-radius:10px;margin:10px;}
+        .bubble {position:absolute;bottom:0;width:20px;height:20px;border-radius:50%;background:#80deea;animation: rise 3s infinite;}
+        .bubble:nth-child(2){left:30px;animation-delay:1s;}
+        .bubble:nth-child(3){left:60px;animation-delay:2s;}
+        @keyframes rise {
+            0% {bottom:0;opacity:1;}
+            100% {bottom:130px;opacity:0;}
+        }
+        </style>
+        <div class="bubble-container">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    elif anion=="Sulfat (SO₄²⁻)":
+        st.latex(r"SO_4^{2-} + BaCl_2 \rightarrow BaSO_4(s) \downarrow + 2Cl^-")
+        tube_viz("lightblue","white",35)
