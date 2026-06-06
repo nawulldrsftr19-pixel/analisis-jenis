@@ -57,7 +57,7 @@ def play_centrifuge():
 st.markdown('<h1 class="main-title">🧪 Virtual Lab: Bagan Analisis Per Anion</h1>', unsafe_allow_html=True)
 
 # Layout Tengah
-_, col_main, _ = st.columns([2, 3])
+_, col_main, _ = st.columns([2, 3, 2])
 
 with col_main:
     st.markdown('<div class="center-box">', unsafe_allow_html=True)
