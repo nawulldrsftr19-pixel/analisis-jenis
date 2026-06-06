@@ -1,4 +1,4 @@
-LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik 
+st.title ("====LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik====")
 
 import streamlit as st
 import time
