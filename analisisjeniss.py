@@ -39,7 +39,4 @@ with st.expander("Campuran Contoh Gol I–V"):
                 st.button("Sr²⁺ + Na₂CO₃ → SrCO₃ (Putih)")
                 st.button("Ca²⁺ + H₂C₂O₄ + NH₄OH → CaC₂O₄ (Putih)")
 
-# ─── RINGKASAN ───────────────────────────────────────────────────────────────
-st.markdown("### 📖 Ringkasan")
-st.markdown("""
-- **Gol
+
