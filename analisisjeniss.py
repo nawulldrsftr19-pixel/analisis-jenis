@@ -71,3 +71,56 @@ with tab1:
         if step>=4:
             dot.edge('Fe(OH)₃','Fe(SCN)₃ (Merah)',label='+ SCN⁻')
             dot.edge('Al(OH)₄⁻','Al(OH)₃ (Putih)',label='+ HCl/Na₂CO₃')
+            dot.edge('Sr²⁺, Ca²⁺','SrCO₃ (Putih)',label='+ Na₂CO₃')
+            dot.edge('Sr²⁺, Ca²⁺','CaC₂O₄ (Putih)',label='+ H₂C₂O₄ + NH₄OH')
+        return dot
+    st.graphviz_chart(buat_bagan(st.session_state.langkah))
+    if st.button("➡️ Langkah Berikutnya"):
+        if st.session_state.langkah<4:
+            st.session_state.langkah+=1; st.rerun()
+    if st.button("🔄 Reset"):
+        st.session_state.langkah=0; st.rerun()
+
+# --- TAB 2: ANALISIS KATION (dengan animasi) ---
+with tab2:
+    st.subheader("🛠️ Analisis Kation")
+    gol = st.selectbox("Pilih Golongan:",["Golongan I","Golongan III","Golongan IV"])
+    if gol=="Golongan I":
+        st.info("Uji dengan HCl encer → endapan AgCl, PbCl₂, Hg₂Cl₂.")
+        if st.button("Jalankan Uji Gol I"):
+            centrifuge_action()
+            tube_viz("lightblue","white",40)
+    elif gol=="Golongan III":
+        st.info("Uji dengan NH₄OH → endapan Fe(OH)₃ & Al(OH)₃.")
+        if st.button("Uji Fe³⁺"):
+            st.latex(r"Fe^{3+} + 3SCN^- \rightarrow Fe(SCN)_3 (Merah)")
+            tube_viz("#b71c1c")
+        if st.button("Uji Al³⁺"):
+            st.latex(r"Al^{3+} + 3OH^- \rightarrow Al(OH)_3 (Putih)")
+            tube_viz("lightblue","white",35)
+    elif gol=="Golongan IV":
+        st.info("Identifikasi Ba²⁺, Sr²⁺, Ca²⁺ dengan uji nyala & endapan.")
+        st.markdown("### Barium (Ba²⁺)")
+        flame_viz("#adff2f"); st.write("Nyala hijau apel")
+        st.latex(r"Ba^{2+} + CrO_4^{2-} \rightarrow BaCrO_4 (Kuning)")
+        st.markdown("### Stronsium (Sr²⁺)")
+        flame_viz("#ff0000"); st.write("Nyala merah karmin")
+        st.latex(r"Sr^{2+} + CO_3^{2-} \rightarrow SrCO_3 (Putih)")
+        st.markdown("### Kalsium (Ca²⁺)")
+        flame_viz("#ff4500"); st.write("Nyala merah bata")
+        st.latex(r"Ca^{2+} + C_2O_4^{2-} \rightarrow CaC_2O_4 (Putih)")
+
+# --- TAB 3: ANALISIS ANION (dengan animasi) ---
+with tab3:
+    st.subheader("📝 Analisis Anion")
+    anion = st.selectbox("Pilih Anion:",["Klorida (Cl⁻)","Iodida (I⁻)","Karbonat (CO₃²⁻)","Sulfat (SO₄²⁻)"])
+    if anion=="Klorida (Cl⁻)":
+        st.latex(r"Cl^- + AgNO_3 \rightarrow AgCl (Putih)")
+        tube_viz("lightblue","white",35)
+    elif anion=="Iodida (I⁻)":
+        st.latex(r"2I^- + HgCl_2 \rightarrow HgI_2 (Merah)")
+        st.write("Jika KI berlebih → (HgI₄)²⁻ (Larutan Kuning)")
+        tube_viz("yellow","red",35)
+    elif anion=="Karbonat (CO₃²⁻)":
+        st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) ↑ + H_2O")
+        st.write("Uji: gelembung gas
