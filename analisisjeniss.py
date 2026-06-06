@@ -58,9 +58,6 @@ button:hover {
 # --- CSS untuk animasi (spinner, flame, tube) ---
 st.markdown(""" ... """, unsafe_allow_html=True)
 
-# --- Fungsi visual ---
-def tube_viz(...):
-    ...
 
 
 #--- CSS untuk judul ---
