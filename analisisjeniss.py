@@ -67,7 +67,7 @@ st.sidebar.title("📍 Sidebar 1: Bagan Alir")
 menu_bagan = st.sidebar.radio("Pilih Alur Bagan:", ["Golongan I", "Golongan III", "Golongan IV"])
 
 # --- MENU UTAMA DI TENGAH ---
-_, col_center, _ = st.columns([2, 3])
+_, col_center, _ = st.columns([2, 3, 2])
 
 with col_center:
     if menu_bagan == "Golongan I":
