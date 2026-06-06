@@ -1,8 +1,8 @@
-st.title ("====LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik====")
-
 import streamlit as st
 import time
 import graphviz
+
+st.title ("====LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik====")
 
 st.set_page_config(page_title="Virtual Lab: Analisis Kualitatif", layout="wide")
 
