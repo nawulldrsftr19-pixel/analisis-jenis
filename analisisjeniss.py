@@ -2,6 +2,71 @@ import streamlit as st
 import time
 import graphviz
 
+import streamlit as st
+import time
+import graphviz
+
+# --- Judul utama ---
+st.title("LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik")
+
+# --- Judul dengan tab warna + efek hover glow ---
+st.markdown(""" ... """, unsafe_allow_html=True)
+
+# --- Konfigurasi halaman ---
+st.set_page_config(page_title="Virtual Lab: Analisis Kualitatif", layout="wide")
+
+# --- CSS tambahan untuk tampilan lucu ---
+st.markdown("""
+<style>
+/* Background pastel bergerak */
+.stApp {
+    background: linear-gradient(135deg, #fce4ec, #e3f2fd, #e8f5e9);
+    animation: bgmove 15s infinite alternate;
+}
+@keyframes bgmove {
+    0% {background-position: left;}
+    100% {background-position: right;}
+}
+
+/* Font judul playful */
+.title-tabs {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Tab judul pulse animasi */
+.title-tab {
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05); box-shadow: 0 0 15px rgba(255,255,255,0.7);}
+    100% {transform: scale(1);}
+}
+
+/* Tombol lucu */
+button {
+    background: linear-gradient(45deg, #ffccbc, #ffe0b2);
+    border-radius: 12px !important;
+    font-weight: bold !important;
+    color: #4e342e !important;
+    transition: 0.3s;
+}
+button:hover {
+    background: linear-gradient(45deg, #ff80ab, #ffeb3b);
+    color: white !important;
+    transform: scale(1.1);
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- CSS untuk animasi (spinner, flame, tube) ---
+st.markdown(""" ... """, unsafe_allow_html=True)
+
+# --- Fungsi visual ---
+def tube_viz(...):
+    ...
+
+
 #--- CSS untuk judul ---
 st.title ("LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik")
 # --- Judul dengan tab warna + efek hover glow ---
