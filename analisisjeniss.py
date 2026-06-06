@@ -427,13 +427,19 @@ if st.button("Lihat Hasil"):
         skor += 10
 
         st.success(f"Skor Anda: {skor}/100")
+        st.session_state.skor = skor  # simpan skor
 
-        if skor >= 80:
+    # tampilkan skor kalau sudah dihitung
+    if st.session_state.skor > 0:
+        st.success(f"Skor Anda: {st.session_state.skor}/100")
+        if st.session_state.skor >= 80:
             st.balloons()
             st.write("🎉 Sangat Baik! Pemahaman Anda sudah sangat baik.")
-        elif skor >= 60:
+        elif st.session_state.skor >= 60:
             st.write("👍 Baik! Tetap semangat belajar.")
         else:
             st.write("📚 Perlu belajar lagi agar lebih memahami materi.")
+
+    
 
 
