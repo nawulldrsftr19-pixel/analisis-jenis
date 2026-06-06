@@ -68,7 +68,9 @@ with col_center:
 
     # --- TAB 1: BAGAN ALIR ---
     with tab1:
-        st.subheader("📍 Mind Map Pemisahan Kation [1]")
+         st.subheader("Bagan Pemisahan Kation (Mind Map)")
+    # Menampilkan Mind Map dari sumber [1]
+    st.image("bagan pemksahan kation.png", use_column_width=True
 
 
     # --- TAB 2: ANALISIS KATION ---
