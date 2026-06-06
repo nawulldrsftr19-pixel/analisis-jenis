@@ -1,130 +1,107 @@
 import streamlit as st
-import time
 
 # --- KONFIGURASI HALAMAN ---
-st.set_page_config(page_title="Virtual Lab: Analisis Kualitatif", layout="wide")
+st.set_page_config(page_title="Interactive Kation MindMap", layout="wide")
 
-# --- CSS: TEMA BIRU, LAYOUT TENGAH & ANIMASI ---
+# --- CSS CUSTOM UNTUK TAMPILAN BAGAN (MIND MAP STYLE) ---
 st.markdown("""
     <style>
-    .stApp { background-color: #f0f7ff; }
-    .main-title { color: #0d47a1; text-align: center; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .center-container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 20px; }
+    .stApp { background-color: #f8f9fa; }
+    .center-col { display: flex; flex-direction: column; align-items: center; }
     
-    /* Animasi Api (Flame Test) */
-    .flame-wrapper { display: flex; justify-content: center; align-items: flex-end; height: 80px; margin: 10px; }
-    .flame {
-        width: 35px; height: 35px; border-radius: 50% 0 50% 50%;
-        transform: rotate(-45deg); animation: flicker 0.6s infinite alternate;
+    /* Gaya Kotak Bagan (Nodes) */
+    .node {
+        padding: 15px;
+        border-radius: 10px;
+        margin: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        min-width: 200px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        border: 2px solid #333;
     }
-    @keyframes flicker { 0% { transform: rotate(-45deg) scale(1); opacity: 0.8; } 100% { transform: rotate(-45deg) scale(1.2); opacity: 1; } }
+    .node-start { background-color: #e1bee7; color: #4a148c; } /* Ungu */
+    .node-reagent { background-color: #bbdefb; color: #0d47a1; } /* Biru */
+    .node-result { background-color: #c8e6c9; color: #1b5e20; } /* Hijau */
+    .node-final { background-color: #fff9c4; color: #f57f17; border: 2px dashed #f57f17; } /* Kuning */
     
-    /* Animasi Tabung Reaksi */
-    .tube-box { display: flex; justify-content: center; margin: 20px 0; }
-    .tube {
-        width: 55px; height: 160px; border: 3px solid #333; border-radius: 0 0 30px 30px;
-        position: relative; background: rgba(255,255,255,0.4); overflow: hidden;
-    }
-    .liquid { position: absolute; bottom: 0; width: 100%; transition: height 1s; }
-    .pellet { position: absolute; bottom: 0; width: 100%; border-radius: 0 0 27px 27px; transition: height 1s; }
-    
-    /* Centrifuge Spinner */
-    .spin-icon {
-        border: 8px solid #f3f3f3; border-top: 8px solid #1565c0;
-        border-radius: 50%; width: 50px; height: 50px;
-        animation: spin 1s linear infinite; margin: 10px auto;
-    }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    /* Panah Penghubung */
+    .arrow { font-size: 24px; color: #333; margin: -5px 0; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- FUNGSI PEMBANTU ---
-def tube_viz(liq_color, p_color=None, p_height=0):
-    p_html = f'<div class="pellet" style="height:{p_height}px; background:{p_color};"></div>' if p_color else ""
-    st.markdown(f'<div class="tube-box"><div class="tube"><div class="liquid" style="height:75%; background:{liq_color}; opacity:0.6;"></div>{p_html}</div></div>', unsafe_allow_html=True)
+# --- UI UTAMA (SEMUA DI TENGAH) ---
+st.markdown("<h1 style='text-align: center; color: #0d47a1;'>🧪 Bagan Alir Pemisahan Kation Interaktif</h1>", unsafe_allow_html=True)
+st.write("<center>Berdasarkan bagan pemisahan kation Gol I - V</center>", unsafe_allow_html=True)
 
-def flame_viz(color):
-    st.markdown(f'<div class="flame-wrapper"><div class="flame" style="background:{color}; box-shadow:0 0 20px {color};"></div></div>', unsafe_allow_html=True)
-
-def centrifuge_action():
-    placeholder = st.empty()
-    with placeholder.container():
-        st.markdown('<div class="spin-icon"></div>', unsafe_allow_html=True)
-        st.write("<center>🌀 Memutar pada 3000 rpm (Sesuai Prosedur)...</center>", unsafe_allow_html=True)
-        time.sleep(2)
-    placeholder.empty()
-    st.success("✅ Pemisahan Pellet & Supernatan Selesai [2]!")
-
-# --- UI UTAMA ---
-st.markdown('<h1 class="main-title">🧪 Virtual Lab: Analisis Kation & Anion Terpadu</h1>', unsafe_allow_html=True)
-
-# Layout Tengah (Space - Content - Space)
-_, col_center, _ = st.columns([1, 5, 1])
+# Layout Tengah
+_, col_center, _ = st.columns([1])
 
 with col_center:
-    st.markdown('<div class="center-container">', unsafe_allow_html=True)
+    # Komponen awal yang selalu muncul
+    st.markdown('<div class="center-col"><div class="node node-start">Campuran Contoh Gol I - V</div><div class="arrow">↓</div><div class="node node-reagent">+ HCl Encer</div></div>', unsafe_allow_html=True)
     
-    tab1, tab2, tab3 = st.tabs(["📊 Bagan Alir (Mind Map)", "🔹 Analisis Kation", "🧪 Analisis Anion"])
+    st.divider()
+    
+    # TABS UNTUK TIAP CABANG BAGAN
+    tab1, tab2, tab3 = st.tabs(["🔹 Golongan I (Endapan)", "🔹 Golongan III (Endapan)", "🔹 Golongan IV (Larutan)"])
 
-    # --- TAB 1: BAGAN ALIR ---
+    # --- TAB GOLONGAN I ---
     with tab1:
-         st.subheader("Bagan Pemisahan Kation (Mind Map)")
-    # Menampilkan Mind Map dari sumber [1]
-    st.image("bagan pemisahan kation.png", use_column_width=True)
+        st.info("Eksplorasi pemisahan dari Endapan Gol I (AgCl, PbCl2, Hg2Cl2)")
+        sub_step_gol1 = st.radio("Pilih Tahapan Identifikasi:", ["Awal", "Pemisahan Pb", "Pemisahan Ag & Hg"], horizontal=True)
+        
+        st.markdown('<div class="center-col">', unsafe_allow_html=True)
+        st.markdown('<div class="node node-result">Endapan Gol I (AgCl, PbCl2, Hg2Cl2)</div>', unsafe_allow_html=True)
+        
+        if sub_step_gol1 != "Awal":
+            st.markdown('<div class="arrow">↓</div><div class="node node-reagent">+ H2O Panas</div>', unsafe_allow_html=True)
+            
+            if sub_step_gol1 == "Pemisahan Pb":
+                st.markdown('<div class="arrow">↓</div><div class="node node-final">Pb2+<br>(+ K2CrO4 -> PbCrO4 Kuning 🟡)</div>', unsafe_allow_html=True)
+            
+            elif sub_step_gol1 == "Pemisahan Ag & Hg":
+                st.markdown('<div class="arrow">↓</div><div class="node node-result">Residu AgCl, Hg2Cl2</div>', unsafe_allow_html=True)
+                st.markdown('<div class="arrow">↓</div><div class="node node-reagent">+ NH4OH Berlebih</div>', unsafe_allow_html=True)
+                
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.markdown('<div class="node node-final">Hg(NH2)Cl + Hg<br>(Putih + Hitam ⚫)</div>', unsafe_allow_html=True)
+                with col_b:
+                    st.markdown('<div class="node node-final">Ag(NH3)2+ Cl-<br>(+ HNO3 -> AgCl Putih ⚪)</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-
-    # --- TAB 2: ANALISIS KATION ---
+    # --- TAB GOLONGAN III ---
     with tab2:
-        st.subheader("🛠️ Simulasi Pemisahan Kation [2, 3]")
-        gol = st.selectbox("Pilih Golongan Kation:", ["Golongan I", "Golongan III", "Golongan IV"])
-        
-        if gol == "Golongan I":
-            st.info("Penambahan HCl encer untuk memisahkan Ag+, Pb2+, Hg2^2+.")
-            if st.button("Jalankan Uji Gol I"):
-                st.latex(r"Ag^+ + Cl^- \rightarrow AgCl(s) \downarrow \text{ (Putih)}")
-                st.latex(r"Pb^{2+} + 2Cl^- \rightarrow PbCl_2(s) \downarrow \text{ (Putih)}")
-                centrifuge_action()
-                tube_viz("rgba(173,216,230,0.3)", "white", 40)
-        
-        elif gol == "Golongan III":
-            st.info("Penambahan NH4OH untuk memisahkan Fe3+ & Al3+.")
-            if st.button("Uji Besi (Fe3+)"):
-                st.latex(r"Fe^{3+} + 3SCN^- \rightarrow [Fe(SCN)]_3(aq) \text{ (Merah Darah)}")
-                tube_viz("#b71c1c")
-        
-        elif gol == "Golongan IV":
-            st.info("Identifikasi Ba2+, Sr2+, Ca2+ melalui Uji Nyala & Pengendapan.")
-            c1, c2, c3 = st.columns(3)
+        st.info("Eksplorasi pemisahan dari Larutan (Al3+, Fe3+)")
+        if st.checkbox("Tampilkan Alur Pemisahan Gol III"):
+            st.markdown('<div class="center-col">', unsafe_allow_html=True)
+            st.markdown('<div class="node node-result">Larutan (Al3+, Fe3+, Ba2+, Sr2+, Ca2+)</div>', unsafe_allow_html=True)
+            st.markdown('<div class="arrow">↓</div><div class="node node-reagent">+ NH4OH Berlebih</div>', unsafe_allow_html=True)
+            st.markdown('<div class="arrow">↓</div><div class="node node-result">Endapan Gol III (Al(OH)3, Fe(OH)3)</div>', unsafe_allow_html=True)
+            st.markdown('<div class="arrow">↓</div><div class="node node-reagent">+ NaOH</div>', unsafe_allow_html=True)
+            
+            c1, c2 = st.columns(2)
             with c1:
-                st.caption("Barium (Ba2+)")
-                flame_viz("#adff2f") # Hijau Apel
-                st.latex(r"Ba^{2+} + CrO_4^{2-} \rightarrow BaCrO_4(s) \downarrow \text{ (Kuning)}")
+                st.markdown('<div class="node node-final">Fe(OH)3<br>(+ SCN- -> Merah Darah 🔴)</div>', unsafe_allow_html=True)
             with c2:
-                st.caption("Stronsium (Sr2+)")
-                flame_viz("#ff0000") # Merah Tua
-                st.latex(r"Sr^{2+} + SO_4^{2-} \rightarrow SrSO_4(s) \downarrow \text{ (Putih)}")
-            with c3:
-                st.caption("Kalsium (Ca2+)")
-                flame_viz("#ff4500") # Merah Bata
-                st.latex(r"Ca^{2+} + C_2O_4^{2-} \rightarrow CaC_2O_4(s) \downarrow \text{ (Putih)}")
+                st.markdown('<div class="node node-final">Al(OH)4-<br>(+ HCl -> Al(OH)3 Putih ⚪)</div>', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- TAB 3: ANALISIS ANION ---
+    # --- TAB GOLONGAN IV ---
     with tab3:
-        st.subheader("📝 Identifikasi Anion Spesifik [4]")
-        anion = st.selectbox("Pilih Anion:", ["Klorida (Cl-)", "Iodida (I-)", "Karbonat (CO3 2-)", "Sulfat (SO4 2-)"])
-        
-        if anion == "Iodida (I-)":
-            st.latex(r"2I^- + HgCl_2 \rightarrow HgI_2(s) \downarrow \text{ (Endapan Merah)}")
-            st.write("Catatan: Jika KI berlebih $\\rightarrow (HgI_4)^{2-}$ (Larutan Kuning) [4].")
-            tube_viz("yellow", "red", 35)
-        elif anion == "Klorida (Cl-)":
-            st.latex(r"Cl^- + AgNO_3 \rightarrow AgCl(s) \downarrow \text{ (Endapan Putih)}")
-            tube_viz("rgba(255,255,255,0.2)", "white", 35)
-        elif anion == "Karbonat (CO3 2-)":
-            st.latex(r"CO_3^{2-} + 2HCl \rightarrow CO_2(g) \uparrow + H_2O + 2Cl^-")
-            st.write("Hasil: Terbentuk gas dan endapan putih dengan $Ba(OH)_2$ [4].")
-        elif anion == "Sulfat (SO4 2-)":
-            st.latex(r"SO_4^{2-} + BaCl_2 \rightarrow BaSO_4(s) \downarrow + 2Cl^-")
-            tube_viz("rgba(255,255,255,0.2)", "white", 35)
-
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.info("Eksplorasi pemisahan untuk kation alkali tanah")
+        if st.button("Lihat Bagan Golongan IV"):
+            st.markdown('<div class="center-col">', unsafe_allow_html=True)
+            st.markdown('<div class="node node-result">Larutan Gol IV (Ba2+, Sr2+, Ca2+)</div>', unsafe_allow_html=True)
+            st.markdown('<div class="arrow">↓</div><div class="node node-reagent">+ K2CrO4</div>', unsafe_allow_html=True)
+            
+            # Percabangan Ba vs Sr/Ca
+            ca1, ca2 = st.columns(2)
+            with ca1:
+                st.markdown('<div class="node node-final">BaCrO4 (Kuning 🟡)</div>', unsafe_allow_html=True)
+            with ca2:
+                st.markdown('<div class="node node-result">Larutan Sr2+, Ca2+</div>', unsafe_allow_html=True)
+                st.markdown('<div class="arrow">↓</div><div class="node node-reagent">+ Na2CO3 / H2C2O4</div>', unsafe_allow_html=True)
+                st.markdown('<div class="node node-final">Endapan Putih (Sr/Ca) ⚪</div>', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
