@@ -1,4 +1,5 @@
 import streamlit as st
+import time
 import graphviz
 
 # --- KONFIGURASI HALAMAN ---
