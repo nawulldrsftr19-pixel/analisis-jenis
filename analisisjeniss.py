@@ -133,9 +133,4 @@ else:
             render_tube("#bbdefb", tinggi_cair=50)
             st.caption("Ilustrasi tabung siap reaksi")
 
-# --- FOOTER & TIPS ---
-st.sidebar.markdown("---")
-st.sidebar.subheader("💡 Tips Teknis [3]")
-st.sidebar.write("- **Keseimbangan**: Tabung harus seimbang saat sentrifugasi.")
-st.sidebar.write("- **Presisi**: Ambil supernatan dengan hati-hati menggunakan pipet.")
-st.sidebar.write("- **Kecepatan**: Standar lab 3000 rpm untuk pemisahan optimal.")
+
