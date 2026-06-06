@@ -1,42 +1,21 @@
 import streamlit as st
 
-st.set_page_config(page_title="Bagan Analisis Kation", page_icon="⚗️", layout="wide")
+st.set_page_config(page_title="Mind Map Analisis Kation", page_icon="⚗️", layout="wide")
 
-st.title("🧪 Laboratorium Virtual — Bagan Analisis Kualitatif Kation Gol I–V")
-st.write("Klik setiap node bagan untuk membuka langkah reaksi berikutnya.")
+st.title("🧪 Mind Map Interaktif — Analisis Kualitatif Kation Gol I–V")
+st.write("Klik node di bawah untuk membuka detail reaksi.")
 
-# ─── BAGAN UTAMA ───────────────────────────────────────────────────────────────
-with st.expander("Campuran Contoh Gol I–V"):
-    st.info("Larutan awal mengandung campuran kation Golongan I–V.")
+# ─── BAGAN MIND MAP ─────────────────────────────────────────────────────────────
+st.subheader("Bagan Alur Analisis")
+st.graphviz_chart("""
+digraph {
+    node [shape=box, style=filled, color=lightblue, fontname="Helvetica"];
+    "Campuran Gol I–V" -> "Tambah HCl Encer";
+    "Tambah HCl Encer" -> "Endapan Gol I (Ag, Pb, Hg)";
+    "Tambah HCl Encer" -> "Filtrat (Al, Fe, Ba, Sr, Ca)";
     
-    # Cabang Golongan I
-    with st.expander("+ HCl Encer → Endapan Golongan I (Ag, Pb, Hg)"):
-        st.success("Endapan putih klorida terbentuk.")
-        
-        with st.expander("+ H₂O Panas → Pb²⁺ Larut"):
-            st.info("Pb²⁺ larut → uji lanjut.")
-            st.button("Pb²⁺ + K₂CrO₄ → PbCrO₄ (Kuning)")
-        
-        with st.expander("Endapan AgCl & Hg₂Cl₂ + NH₄OH"):
-            st.warning("Hg(NH₂)Cl + Hg (Putih/Hitam), Ag(NH₃)₂⁺ larut.")
-            st.button("Ag(NH₃)₂⁺ + HNO₃ → AgCl (Putih)")
-    
-    # Cabang Golongan III
-    with st.expander("Filtrat (Al, Fe, Ba, Sr, Ca) + NH₄OH Berlebih"):
-        st.info("Endapan hidroksida terbentuk (Al, Fe).")
-        
-        with st.expander("Fe(OH)₃ Endapan"):
-            st.button("Fe³⁺ + SCN⁻ → Fe(SCN)₃ (Merah)")
-        
-        with st.expander("Al(OH)₄⁻ Larutan"):
-            st.button("Al(OH)₄⁻ + HCl/Na₂CO₃ → Al(OH)₃ (Putih)")
-        
-        # Cabang Golongan IV
-        with st.expander("Filtrat (Ba, Sr, Ca) + K₂CrO₄"):
-            st.success("Ba²⁺ → Endapan kuning BaCrO₄.")
-            
-            with st.expander("Filtrat (Sr, Ca)"):
-                st.button("Sr²⁺ + Na₂CO₃ → SrCO₃ (Putih)")
-                st.button("Ca²⁺ + H₂C₂O₄ + NH₄OH → CaC₂O₄ (Putih)")
-
-
+    "Endapan Gol I (Ag, Pb, Hg)" -> "Pb²⁺ + H₂O Panas";
+    "Pb²⁺ + H₂O Panas" -> "Pb²⁺ + K₂CrO₄ → PbCrO₄ (Kuning)";
+    "Endapan Gol I (Ag, Pb, Hg)" -> "AgCl & Hg₂Cl₂ + NH₄OH";
+    "AgCl & Hg₂Cl₂ + NH₄OH" -> "Hg(NH₂)Cl + Hg (Putih/Hitam)";
+    "AgCl &
