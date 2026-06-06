@@ -41,4 +41,4 @@ with col1:
         st.info("Larutan awal mengandung campuran kation Golongan I–V.")
     if st.button("Endapan Gol I (Ag, Pb, Hg)"):
         st.success("Endapan putih klorida terbentuk (AgCl, PbCl₂, Hg₂Cl₂).")
-    if st
+    if st :
