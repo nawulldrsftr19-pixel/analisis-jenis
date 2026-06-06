@@ -338,12 +338,93 @@ with tab4:
         key="s2"
     )
 
-    # ... lanjutkan soal 3–10 persis seperti script kuis kamu ...
+    # Soal 3
+jawab3 = st.radio(
+    "3. Endapan AgCl berwarna ...",
+    ["Merah", "Kuning", "Putih", "Hijau"],
+    key="s3"
+)
 
-    if st.button("Lihat Hasil"):
-        if jawab1 == "HCl": skor += 10
-        if jawab2 == "Ag⁺": skor += 10
-        # dst sampai soal 10...
+# Soal 4
+jawab4 = st.radio(
+    "4. Kation Al³⁺ termasuk golongan ...",
+    ["I", "II", "III", "V"],
+    key="s4"
+)
+
+# Soal 5
+jawab5 = st.radio(
+    "5. Pereaksi yang digunakan untuk mengendapkan Al³⁺ dan Fe³⁺ adalah ...",
+    ["NH₄OH", "HCl", "BaCl₂", "KI"],
+    key="s5"
+)
+
+# Soal 6
+jawab6 = st.radio(
+    "6. Kation yang termasuk golongan V adalah ...",
+    ["Ag⁺", "Pb²⁺", "Ca²⁺", "Fe³⁺"],
+    key="s6"
+)
+
+# Soal 7
+jawab7 = st.radio(
+    "7. Pereaksi untuk identifikasi ion klorida (Cl⁻) adalah ...",
+    ["AgNO₃", "NaOH", "NH₄OH", "K₂CrO₄"],
+    key="s7"
+)
+
+# Soal 8
+jawab8 = st.radio(
+    "8. Anion yang menghasilkan gas CO₂ saat direaksikan dengan asam adalah ...",
+    ["Cl⁻", "I⁻", "CO₃²⁻", "SO₄²⁻"],
+    key="s8"
+)
+
+# Soal 9
+jawab9 = st.radio(
+    "9. Pereaksi untuk identifikasi ion sulfat adalah ...",
+    ["AgNO₃", "BaCl₂", "KI", "NH₄OH"],
+    key="s9"
+)
+
+# Soal 10
+jawab10 = st.radio(
+    "10. Ion yang menghasilkan endapan putih dengan BaCl₂ adalah ...",
+    ["SO₄²⁻", "Cl⁻", "I⁻", "NO₃⁻"],
+    key="s10"
+)
+
+if st.button("Lihat Hasil"):
+
+    if jawab1 == "HCl":
+        skor += 10
+
+    if jawab2 == "Ag⁺":
+        skor += 10
+
+    if jawab3 == "Putih":
+        skor += 10
+
+    if jawab4 == "III":
+        skor += 10
+
+    if jawab5 == "NH₄OH":
+        skor += 10
+
+    if jawab6 == "Ca²⁺":
+        skor += 10
+
+    if jawab7 == "AgNO₃":
+        skor += 10
+
+    if jawab8 == "CO₃²⁻":
+        skor += 10
+
+    if jawab9 == "BaCl₂":
+        skor += 10
+
+    if jawab10 == "SO₄²⁻":
+        skor += 10
 
         st.success(f"Skor Anda: {skor}/100")
 
