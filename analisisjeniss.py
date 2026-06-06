@@ -66,7 +66,7 @@ menu = st.sidebar.radio("Pilih Analisis:", ["📍 Bagan Pemisahan (Mind Map)", "
 st.markdown('<h1 class="main-title">Virtual Lab: Analisis Kualitatif Terintegrasi</h1>', unsafe_allow_html=True)
 
 # --- KONTEN TENGAH (CENTERED TOOLS) ---
-_, col_center, _ = st.columns([1, 3])
+_, col_center, _ = st.columns([1, 3, 1])
 
 with col_center:
     # --- BAGIAN 1: BAGAN INTERAKTIF ---
