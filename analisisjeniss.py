@@ -41,4 +41,14 @@ with col1:
         st.info("Larutan awal mengandung campuran kation Golongan I–V.")
     if st.button("Endapan Gol I (Ag, Pb, Hg)"):
         st.success("Endapan putih klorida terbentuk (AgCl, PbCl₂, Hg₂Cl₂).")
-    if st :
+    if st :import streamlit as st
+
+# Misalnya kamu punya kondisi di baris 44
+if st:
+    # isi blok harus diindentasi
+    st.write("Streamlit aktif, blok if berjalan")
+
+# Kalau memang belum ada logika, bisa pakai pass
+if st:
+    pass
+
