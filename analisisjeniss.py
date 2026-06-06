@@ -70,7 +70,7 @@ with col_center:
     with tab1:
          st.subheader("Bagan Pemisahan Kation (Mind Map)")
     # Menampilkan Mind Map dari sumber [1]
-    st.image("bagan pemksahan kation.png", use_column_width=True
+    st.image("bagan pemisahan kation.png", use_column_width=True
 
 
     # --- TAB 2: ANALISIS KATION ---
