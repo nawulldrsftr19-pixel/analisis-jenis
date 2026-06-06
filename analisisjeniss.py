@@ -191,7 +191,11 @@ elif materi == "Anion":
     """)
 
 # --- Tab menu ---
-tab1, tab2, tab3 = st.tabs(["📊 Bagan Alir (Mind Map)", "🔹 Analisis Kation", "🧪 Analisis Anion"])
+tab1, tab2, tab3, tab4 = st.tabs([
+    "📊 Bagan Alir (Mind Map)", 
+    "🔹 Analisis Kation", 
+    "🧪 Analisis Anion", 
+    "📝 Kuis Kation & Anion"])
 
 # --- TAB 1: BAGAN (tetap ada, jangan diubah) ---
 with tab1:
@@ -313,5 +317,42 @@ with tab3:
         st.latex(r"SO_4^{2-} + BaCl_2 \rightarrow BaSO_4(s) \downarrow + 2Cl^-")
         st.write("Uji: terbentuk endapan putih BaSO₄ yang tidak larut dalam asam.")
         tube_viz("lightblue","white",35)
+
+# --- TAB 4: KUIS ---
+with tab4:
+    st.subheader("📝 Kuis Kation dan Anion")
+
+    skor = 0
+
+    # Soal 1
+    jawab1 = st.radio(
+        "1. Pereaksi yang digunakan untuk mengendapkan kation golongan I adalah ...",
+        ["NH₄OH", "HCl", "BaCl₂", "H₂SO₄"],
+        key="s1"
+    )
+
+    # Soal 2
+    jawab2 = st.radio(
+        "2. Ion yang termasuk golongan I adalah ...",
+        ["Fe³⁺", "Ag⁺", "Ba²⁺", "Ca²⁺"],
+        key="s2"
+    )
+
+    # ... lanjutkan soal 3–10 persis seperti script kuis kamu ...
+
+    if st.button("Lihat Hasil"):
+        if jawab1 == "HCl": skor += 10
+        if jawab2 == "Ag⁺": skor += 10
+        # dst sampai soal 10...
+
+        st.success(f"Skor Anda: {skor}/100")
+
+        if skor >= 80:
+            st.balloons()
+            st.write("🎉 Sangat Baik! Pemahaman Anda sudah sangat baik.")
+        elif skor >= 60:
+            st.write("👍 Baik! Tetap semangat belajar.")
+        else:
+            st.write("📚 Perlu belajar lagi agar lebih memahami materi.")
 
 
