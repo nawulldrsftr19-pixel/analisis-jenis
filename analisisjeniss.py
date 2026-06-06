@@ -198,4 +198,4 @@ with tab3:
             st.latex(r"SO_4^{2-} + BaCl_2 \rightarrow BaSO_4(s) \downarrow + 2Cl^-")
             tube_viz("rgba(255,255,255,0.2)", "white", 35)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+         st.markdown('</div>', unsafe_allow_html=True)
