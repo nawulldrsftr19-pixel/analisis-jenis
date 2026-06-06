@@ -19,3 +19,4 @@ digraph {
     "Endapan Gol I (Ag, Pb, Hg)" -> "AgCl & Hg₂Cl₂ + NH₄OH";
     "AgCl & Hg₂Cl₂ + NH₄OH" -> "Hg(NH₂)Cl + Hg (Putih/Hitam)";
     "AgCl &
+    """)
