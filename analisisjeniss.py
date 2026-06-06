@@ -180,7 +180,7 @@ with tab2:
                 st.latex(r"Ca^{2+} + C_2O_4^{2-} \rightarrow CaC_2O_4(s) \downarrow \text{ (Putih)}")
 
     # --- TAB 3: ANALISIS ANION ---
-    with tab3:
+with tab3:
         st.subheader("📝 Identifikasi Anion Spesifik [4]")
         anion = st.selectbox("Pilih Anion:", ["Klorida (Cl-)", "Iodida (I-)", "Karbonat (CO3 2-)", "Sulfat (SO4 2-)"])
         
