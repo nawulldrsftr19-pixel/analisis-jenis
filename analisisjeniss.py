@@ -426,18 +426,17 @@ if st.button("Lihat Hasil"):
     if jawab10 == "SO₄²⁻":
         skor += 10
         st.success(f"Skor Anda: {skor}/100")
+ st.session_state.skor = skor
 
-    # tampilkan skor kalau sudah dihitung
-    if st.session_state.skor > 0:
-        st.success(f"Skor Anda: {st.session_state.skor}/100")
+# tampilkan skor kalau sudah dihitung
+if "skor" in st.session_state:
+    st.success(f"Skor Anda: {st.session_state.skor}/100")
     if st.session_state.skor >= 80:
-            st.balloons()
-            st.write("🎉 Sangat Baik! Pemahaman Anda sudah sangat baik.")
+        st.balloons()
+        st.write("🎉 Sangat Baik! Pemahaman Anda sudah sangat baik.")
     elif st.session_state.skor >= 60:
-            st.write("👍 Baik! Tetap semangat belajar.")
+        st.write("👍 Baik! Tetap semangat belajar.")
     else:
-            st.write("📚 Perlu belajar lagi agar lebih memahami materi.")
-
-    
+        st.write("📚 Perlu belajar lagi agar lebih memahami materi.")
 
 
