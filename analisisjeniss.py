@@ -184,8 +184,7 @@ with tab1:
 with tab2:
     st.subheader("🛠️ Analisis Kation")
     gol = st.selectbox("Pilih Golongan:",["Golongan I","Golongan III","Golongan IV"])
-    
-   elif gol=="Golongan I":
+  elif gol=="Golongan I":
         st.info("Uji dengan HCl encer → endapan AgCl, PbCl₂, Hg₂Cl₂.")
         if st.button("Jalankan Uji Gol I"):
         # Reaksi kation Golongan I
