@@ -70,9 +70,7 @@ with col_center:
     with tab1:
         st.subheader("📍 Mind Map Pemisahan Kation [1]")
         try:
-            st.image("NotebookLM Mind Map (1).png", use_column_width=True)
-        except:
-            st.warning("⚠️ File 'NotebookLM Mind Map (1).png' tidak ditemukan.")
+            st.image(![image alt](https://github.com/nawulldrsftr19-pixel/analisis-jenis/blob/8328186babe214c1fbff44c5e42a46837ab6dd65/bagan%20pemisahan%20kation.png))
 
     # --- TAB 2: ANALISIS KATION ---
     with tab2:
