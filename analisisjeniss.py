@@ -59,7 +59,7 @@ def centrifuge_action():
 st.markdown('<h1 class="main-title">🧪 Virtual Lab: Analisis Kation & Anion Terpadu</h1>', unsafe_allow_html=True)
 
 # Layout Tengah (Space - Content - Space)
-_, col_center, _ = st.columns([1, 5])
+_, col_center, _ = st.columns([1, 5, 1])
 
 with col_center:
     st.markdown('<div class="center-container">', unsafe_allow_html=True)
