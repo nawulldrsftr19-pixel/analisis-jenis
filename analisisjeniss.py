@@ -73,45 +73,28 @@ st.title("Analisis Kualitatif Kation (Golongan I-V)")
 st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
 
 # Pengaturan halaman
-st.set_page_config(page_title="Analisis Kation", layout="wide")
+st.set_page_config(page_title="Analisis Kation Golongan I-V", layout="wide")
 
-# --- SIDEBAR ---
-with st.sidebar:
-    st.header("Kontrol Navigasi")
-    st.write("Gunakan menu di bawah untuk melihat tahap pemisahan kation.")
-    
-    # Menggunakan radio button atau slider untuk memilih tahapan
-    pilihan_langkah = st.radio(
-        "Pilih Tahapan Analisis:",
-        ("1. Penambahan HCl (Awal)", 
-         "2. Pemisahan Gol I & III/IV", 
-         "3. Identifikasi Spesifik", 
-         "4. Hasil Akhir (Konfirmasi)")
-    )
-    
-    # Konversi pilihan ke angka untuk fungsi bagan
-    step_map = {
-        "1. Penambahan HCl (Awal)": 1,
-        "2. Pemisahan Gol I & III/IV": 2,
-        "3. Identifikasi Spesifik": 3,
-        "4. Hasil Akhir (Konfirmasi)": 4
-    }
-    langkah = step_map[pilihan_langkah]
-    
-    st.divider()
-    st.info("Bagan ini menunjukkan pemisahan kation golongan I hingga V berdasarkan reaksi kimia spesifik.")
+st.title("🔬 Bagan Pemisahan Kation (Golongan I-V)")
+st.write("Navigasikan tab di bawah untuk melihat alur pemisahan kation secara bertahap berdasarkan bagan analisis kualitatif.")
 
-# --- AREA UTAMA ---
-st.title("Bagan Pemisahan Kation (Golongan I-V)")
+# Membuat sistem Tab untuk navigasi antar langkah
+tab1, tab2, tab3, tab4 = st.tabs([
+    "Step 1: HCl (Gol I)", 
+    "Step 2: H2O Panas & NH4OH", 
+    "Step 3: NaOH & K2CrO4", 
+    "Step 4: Identifikasi Akhir"
+])
 
-# Fungsi untuk membuat grafik (Logic tetap sama berdasarkan sumber [1])
-def buat_bagan(step):
+# Fungsi untuk merender bagan menggunakan Graphviz
+def render_flowchart(step):
     dot = graphviz.Digraph()
-    dot.attr(rankdir='LR')
+    dot.attr(rankdir='LR', size='12,12')
     
-    # Node awal
+    # Titik awal: Campuran Contoh
     dot.node('start', 'Campuran Contoh Gol I - V', style='filled', color='lavender')
 
+    # Logika visualisasi bertahap berdasarkan data dari sumber [1]
     if step >= 1:
         dot.node('hcl', '+ HCl encer', shape='plaintext')
         dot.edge('start', 'hcl')
@@ -122,27 +105,64 @@ def buat_bagan(step):
 
     if step >= 2:
         # Jalur Endapan Gol I
-        dot.edge('gol1', 'Pb2+ & Residu', label='+ H2O Panas')
-        # Jalur Larutan
+        dot.node('hot_water', '+ H2O Panas', shape='plaintext')
+        dot.edge('gol1', 'hot_water')
+        dot.node('pb_sol', 'Pb2+', style='filled', color='lightgreen')
+        dot.node('residu1', 'Residu AgCl, Hg2Cl2', style='filled', color='lightgreen')
+        dot.edge('hot_water', 'pb_sol')
+        dot.edge('hot_water', 'residu1')
+        
+        # Jalur Larutan (Gol III & IV)
         dot.node('nh4oh', '+ NH4OH Berlebih', shape='plaintext')
         dot.edge('larutan1', 'nh4oh')
-        dot.node('gol3', 'Endapan Gol III', style='filled', color='lightgreen')
-        dot.node('gol4', 'Larutan Gol IV', style='filled', color='lightgreen')
+        dot.node('gol3', 'Endapan Gol III\n(Al(OH)3, Fe(OH)3)', style='filled', color='lightgreen')
+        dot.node('gol4', 'Larutan Gol IV\n(Ba2+, Sr2+, Ca2+)', style='filled', color='lightgreen')
         dot.edge('nh4oh', 'gol3')
         dot.edge('nh4oh', 'gol4')
 
     if step >= 3:
+        # Identifikasi Pb & Hg
+        dot.edge('pb_sol', 'PbCrO4 (Kuning)', label='+ K2CrO4')
+        dot.node('nh4oh_res', '+ NH4OH Berlebih', shape='plaintext')
+        dot.edge('residu1', 'nh4oh_res')
+        dot.node('hg_res', 'Hg(NH2)Cl + Hg (Hitam)', style='filled', color='grey')
+        dot.node('ag_complex', 'Ag(NH3)2+ Cl-', style='filled', color='lightgreen')
+        dot.edge('nh4oh_res', 'hg_res')
+        dot.edge('nh4oh_res', 'ag_complex')
+
+        # Identifikasi Gol III & IV
         dot.edge('gol3', 'Fe(OH)3 & Al(OH)4-', label='+ NaOH')
-        dot.edge('gol4', 'BaCrO4 & Sr/Ca', label='+ K2CrO4')
+        dot.edge('gol4', 'BaCrO4 (Kuning)', label='+ K2CrO4')
 
     if step >= 4:
-        dot.node('end', 'Identifikasi Akhir\n(AgCl, Fe3+, Al(OH)3, dll)', shape='doublecircle')
-        dot.edge('gol3', 'end', style='dotted')
-    
+        # Hasil Konfirmasi Akhir
+        dot.edge('ag_complex', 'AgCl (Putih)', label='+ HNO3')
+        dot.edge('al_oh4', 'Al(OH)3 (Putih)', label='Netralisasi')
+        dot.node('final', 'Kation Teridentifikasi:\nAg+, Pb2+, Hg2 2+,\nAl3+, Fe3+, Ba2+', shape='doublecircle', color='orange')
+        dot.edge('start', 'final', style='dotted')
+
     return dot
 
-# Menampilkan bagan di area utama
-st.graphviz_chart(buat_bagan(langkah))
+# Mengisi Konten untuk Setiap Tab
+with tab1:
+    st.subheader("Pemisahan Golongan I")
+    st.info("Pada tahap ini, HCl encer digunakan untuk mengendapkan Ag+, Pb2+, dan Hg2 2+ sebagai garam klorida [1].")
+    st.graphviz_chart(render_flowchart(1))
+
+with tab2:
+    st.subheader("Pemisahan Golongan I, III, dan IV")
+    st.info("Kation dipisahkan menggunakan air panas (untuk Pb) dan NH4OH berlebih untuk memisahkan Golongan III dari Golongan IV [1].")
+    st.graphviz_chart(render_flowchart(2))
+
+with tab3:
+    st.subheader("Identifikasi Spesifik")
+    st.info("Tahap ini melibatkan penambahan K2CrO4 untuk identifikasi Pb dan Ba, serta NaOH untuk memisahkan besi dan aluminium [1].")
+    st.graphviz_chart(render_flowchart(3))
+
+with tab4:
+    st.subheader("Hasil Analisis Akhir")
+    st.success("Seluruh kation dari Golongan I hingga IV telah berhasil dipisahkan dan diidentifikasi melalui reaksi konfirmasi [1].")
+    st.graphviz_chart(render_flowchart(4))
 
     # --- TAB 2: ANALISIS KATION ---
 with tab2:
