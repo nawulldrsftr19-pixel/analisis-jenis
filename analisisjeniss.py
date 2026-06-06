@@ -2,8 +2,47 @@ import streamlit as st
 import time
 import graphviz
 
-st.title ("====LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik====")
+#--- CSS untuk judul ---
+st.title ("LABKIM — Analisis Kualitatif Kation DAN Anion (Metode Sentrifugasi) dan uji spesifik")
+# --- Judul dengan tab warna + efek hover glow ---
+st.markdown("""
+<style>
+.title-tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+.title-tab {
+    padding: 14px 24px;
+    border-radius: 12px 12px 0 0;
+    margin: 0 6px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+.tab1 { background: #42a5f5; }   /* biru */
+.tab2 { background: #ef5350; }   /* merah */
+.tab3 { background: #66bb6a; }   /* hijau */
+.tab4 { background: #ab47bc; }   /* ungu */
 
+/* Efek hover glow */
+.title-tab:hover {
+    transform: translateY(-6px) scale(1.08);
+    background: linear-gradient(45deg, #ffeb3b, #ff4081);
+    box-shadow: 0 0 20px #ff4081;
+}
+</style>
+
+<div class="title-tabs">
+    <div class="title-tab tab1">LABKIM</div>
+    <div class="title-tab tab2">ANALISIS</div>
+    <div class="title-tab tab3">KUALITATIF KATION</div>
+    <div class="title-tab tab4">DAN ANION</div>
+</div>
+""", unsafe_allow_html=True)
 st.set_page_config(page_title="Virtual Lab: Analisis Kualitatif", layout="wide")
 
 # --- CSS untuk animasi ---
