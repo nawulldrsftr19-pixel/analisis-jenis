@@ -71,7 +71,7 @@ with col_center:
 st.title("Analisis Kualitatif Kation (Golongan I-V)")
 st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
 
-    with tab1:
+with tab1:
          st.subheader("Bagan Pemisahan Kation (Mind Map)")
          st.title("Analisis Kualitatif Kation (Golongan I-V)")
          st.write("Klik tombol di bawah untuk melihat langkah-langkah pemisahan kation secara bertahap.")
